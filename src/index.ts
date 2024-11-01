@@ -1,6 +1,8 @@
 import Handlebars from 'handlebars/runtime';
 import { Router } from './Router';
 
+import './index.css';
+
 // components
 import button from './components/button';
 
