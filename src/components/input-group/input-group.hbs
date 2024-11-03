@@ -1,0 +1,11 @@
+<div class="{{cs.inputGroup}} {{className}}">
+  <label class="{{cs.label}}" for="{{id}}">
+    {{label}}
+  </label>
+  {{> input id=id placeholder=label type=type}}
+  {{#if errorMessage}}
+    <div class="{{cs.errorMessage}}">
+      {{errorMessage}}
+    </div>
+  {{/if}}
+</div>

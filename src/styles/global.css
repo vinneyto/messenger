@@ -1,0 +1,37 @@
+/* Typography */
+
+html {
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-text-base);
+  background-color: var(--color-text-on-dark);
+}
+
+/* Layout */
+
+#app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+/* Popup */
+
+.popup {
+  box-shadow: 0px 0px 6px 0px #00000024;
+  border-radius: 1rem;
+  padding: 2.5rem;
+  background-color: var(--color-text-on-dark);
+  display: flex;
+  flex-direction: column;
+  width: 340px;
+}
+
+.popup-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.6rem;
+  line-height: 1.6rem;
+  font-weight: 500;
+}

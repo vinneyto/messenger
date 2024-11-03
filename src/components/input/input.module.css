@@ -1,0 +1,12 @@
+.input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--color-active);
+  font-size: 16px;
+  outline: none;
+  background-color: transparent;
+  font-size: calc(1rem + 1px);
+  line-height: 2;
+  padding: 0;
+  margin: 0;
+}

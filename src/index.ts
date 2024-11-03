@@ -5,14 +5,20 @@ import './index.css';
 
 // components
 import button from './components/button';
+import input from './components/input';
+import inputGroup from './components/input-group';
+import linkButton from './components/link-button';
 
 // pages
 import chatAreaPage from './pages/chat-area.hbs';
-import signInPage from './pages/sign-in.hbs';
+import signInPage from './pages/sign-in';
 import signUpPage from './pages/sign-up.hbs';
 import notFound from './pages/not-found.hbs';
 
 Handlebars.registerPartial('button', button);
+Handlebars.registerPartial('input', input);
+Handlebars.registerPartial('inputGroup', inputGroup);
+Handlebars.registerPartial('linkButton', linkButton);
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('app');

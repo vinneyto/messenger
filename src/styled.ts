@@ -5,7 +5,7 @@ export function styled<T = any>(
   cs: CSSModuleClasses,
 ): Handlebars.TemplateDelegate<T> {
   return (context: T, options?: RuntimeOptions): string => {
-    const wrappedContext = { cs, ...context };
+    const wrappedContext = { ...context, cs };
     return template(wrappedContext, options);
   };
 }
