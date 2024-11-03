@@ -27,11 +27,17 @@ document.addEventListener('DOMContentLoaded', () => {
     throw new Error('Root element not found');
   }
 
-  const makeRoute = (path: string, template: Handlebars.TemplateDelegate) => {
+  const urlParams = new URLSearchParams(window.location.search);
+
+  const makeRoute = (
+    path: string,
+    template: Handlebars.TemplateDelegate,
+    buildCtx = () => {},
+  ) => {
     return {
       path,
       action: () => {
-        const html = template({});
+        const html = template(buildCtx());
         root.innerHTML = html;
       },
     };
@@ -40,7 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
   new Router(
     [
       makeRoute('/', chatAreaPage),
-      makeRoute('/sign-in', signInPage),
+      makeRoute('/sign-in', signInPage, () =>
+        urlParams.has('login') ? { errors: { login: 'Wrong login' } } : {},
+      ),
       makeRoute('/sign-up', signUpPage),
       makeRoute('/404', notFound),
     ],

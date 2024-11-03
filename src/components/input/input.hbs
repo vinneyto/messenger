@@ -1,5 +1,6 @@
 <input
-  id="{{id}}"
+  {{#if id}} id="{{id}}" {{/if}}
+  {{#if name}} name="{{name}}" {{/if}}
   class="{{cs.input}} {{className}}"
   type="{{type}}"
   placeholder="{{placeholder}}"
