@@ -5,6 +5,7 @@
   font-size: 16px;
   outline: none;
   background-color: transparent;
+  color: var(--color-text-base);
   font-size: calc(1rem + 1px);
   line-height: 2;
   padding: 0;

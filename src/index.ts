@@ -12,7 +12,7 @@ import linkButton from './components/link-button';
 // pages
 import chatAreaPage from './pages/chat-area.hbs';
 import signInPage from './pages/sign-in';
-import signUpPage from './pages/sign-up.hbs';
+import signUpPage from './pages/sign-up';
 import notFound from './pages/not-found.hbs';
 
 Handlebars.registerPartial('button', button);

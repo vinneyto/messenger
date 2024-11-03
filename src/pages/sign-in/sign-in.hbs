@@ -1,12 +1,11 @@
 <div class="popup {{cs.signIn}}">
   <h1 class="popup-title">Sign in</h1>
 
-  <form class="{{cs.signInForm}}" action="" method="get">
-    <div class="{{cs.inputGroups}}">
-      {{> inputGroup id="login" name="login" label="Login" type="text" errorMessage=errors.login}}
-      {{> inputGroup id="password" name="password" label="Password" type="password"}}
-    </div>
-    {{> button label="Sign in" type="submit"}}
+  <form action="" method="get">
+    {{> inputGroup id="login" name="login" label="Login" type="text" errorMessage=errors.login}}
+    {{> inputGroup id="password" name="password" label="Password" type="password"}}
+
+    {{> button label="Sign in" className=cs.submitButton type="submit"}}
     {{> linkButton label="Don't have an account?" className=cs.signUpLink href="/sign-up"}}
   </form>
 </div>
