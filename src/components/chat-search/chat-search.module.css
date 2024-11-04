@@ -1,0 +1,31 @@
+.chatSearch {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  background-color: var(--color-input-background);
+  height: 32px;
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.chatSearchPlaceholder {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text-secondary);
+}
+
+.chatSearchInput {
+  border: none;
+  line-height: 32px;
+  width: 100%;
+  outline: none;
+  background: transparent;
+  padding: 0;
+  color: var(--color-text-secondary);
+  display: none;
+}

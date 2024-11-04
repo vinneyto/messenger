@@ -1,6 +1,10 @@
 /* Typography */
 
-html {
+html,
+input,
+button,
+select,
+textarea {
   font-family: "Inter", sans-serif;
   font-size: 12px;
   line-height: 1.5;
