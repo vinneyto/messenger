@@ -1,0 +1,19 @@
+.chatArea {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  align-items: stretch;
+}
+
+.chatList {
+  width: var(--chat-list-width);
+  background-color: var(--color-button-back);
+  border-right: 1px solid var(--color-border);
+  padding: 0 1rem;
+}
+
+.chatDialog {
+  flex-grow: 1;
+  padding: 0 1rem;
+}

@@ -9,4 +9,6 @@
   --color-message-own: #e4edfd;
   --color-button-back: #fbfbfb;
   --color-border: #eaeaea;
+  --chat-list-width: 310px;
+  --chat-header-height: 54px;
 }
