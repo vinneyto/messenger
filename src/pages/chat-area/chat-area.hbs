@@ -1,15 +1,17 @@
 <div class="{{cs.chatArea}}">
 
-  <div class="{{cs.chatList}}">
-    {{> linkProfile }}
+  <nav class="{{cs.sidebar}}">
+    {{> chatLinkProfile }}
     {{> chatSearch }}
 
-    <div class="{{cs.chatListItems}}">
+    <div class="{{cs.sidebarChats}}">
       {{#each chatItems}}
         {{> chatItem name=this.name lastMessage=this.lastMessage}}
       {{/each}}
     </div>
-  </div>
+  </nav>
 
-  <div class="{{cs.chatDialog}}"></div>
+  <div class="{{cs.chatFeed}}">
+    {{> chatHeader }}
+  </div>
 </div>

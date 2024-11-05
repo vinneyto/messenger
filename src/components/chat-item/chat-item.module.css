@@ -17,7 +17,7 @@
   }
 }
 
-.chatItemLogo {
+.avatar {
   width: var(--chat-item-height);
   height: var(--chat-item-height);
   flex-shrink: 0;
@@ -25,7 +25,7 @@
   background-color: var(--color-input-background);
 }
 
-.chatItemDsc {
+.description {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -33,13 +33,12 @@
   height: var(--chat-item-height);
 }
 
-.chatItemName {
-  font-weight: 500;
-  font-size: calc(1rem + 1px);
+.chatName {
   line-height: 1;
+  margin: 0;
 }
 
-.chatItemLastMessage {
+.lastMessage {
   flex-grow: 1;
   overflow: hidden;
   font-size: calc(1rem - 1px);

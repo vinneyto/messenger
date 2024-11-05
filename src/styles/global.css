@@ -12,6 +12,26 @@ textarea {
   background-color: var(--color-text-on-dark);
 }
 
+h1 {
+  font-weight: 500px;
+  font-size: calc(1rem + 6px);
+}
+
+h2 {
+  font-weight: 500px;
+  font-size: calc(1rem + 4px);
+}
+
+h3 {
+  font-weight: 500px;
+  font-size: calc(1rem + 2px);
+}
+
+h4 {
+  font-weight: 500;
+  font-size: calc(1rem + 1px);
+}
+
 /* Layout */
 
 #app {

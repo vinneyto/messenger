@@ -6,7 +6,7 @@
   align-items: stretch;
 }
 
-.chatList {
+.sidebar {
   display: flex;
   flex-direction: column;
   width: var(--chat-list-width);
@@ -14,12 +14,14 @@
   border-right: 1px solid var(--color-border);
 }
 
-.chatListItems {
+.sidebarChats {
   flex: 1;
   overflow: auto;
 }
 
-.chatDialog {
+.chatFeed {
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
-  padding: 0 1rem;
+  padding: 0 2rem;
 }

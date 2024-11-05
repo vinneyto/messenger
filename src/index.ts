@@ -8,9 +8,10 @@ import button from './components/button';
 import input from './components/input';
 import inputGroup from './components/input-group';
 import linkButton from './components/link-button';
-import linkProfile from './components/link-profile';
+import chatLinkProfile from './components/chat-link-profile';
 import chatSearch from './components/chat-search';
 import chatItem from './components/chat-item';
+import chatHeader from './components/chat-header';
 
 import * as icons from './components/icons';
 
@@ -25,9 +26,10 @@ Handlebars.registerPartial('button', button);
 Handlebars.registerPartial('input', input);
 Handlebars.registerPartial('inputGroup', inputGroup);
 Handlebars.registerPartial('linkButton', linkButton);
-Handlebars.registerPartial('linkProfile', linkProfile);
+Handlebars.registerPartial('chatLinkProfile', chatLinkProfile);
 Handlebars.registerPartial('chatSearch', chatSearch);
 Handlebars.registerPartial('chatItem', chatItem);
+Handlebars.registerPartial('chatHeader', chatHeader);
 
 for (const [key, icon] of Object.entries(icons)) {
   Handlebars.registerPartial(`icon_${key}`, icon);
