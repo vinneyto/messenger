@@ -21,6 +21,7 @@ import signInPage from './pages/sign-in';
 import signUpPage from './pages/sign-up';
 import notFound from './pages/not-found.hbs';
 import { chatItems } from './mockData';
+import chatFooter from './components/chat-footer';
 
 Handlebars.registerPartial('button', button);
 Handlebars.registerPartial('input', input);
@@ -30,6 +31,7 @@ Handlebars.registerPartial('chatLinkProfile', chatLinkProfile);
 Handlebars.registerPartial('chatSearch', chatSearch);
 Handlebars.registerPartial('chatItem', chatItem);
 Handlebars.registerPartial('chatHeader', chatHeader);
+Handlebars.registerPartial('chatFooter', chatFooter);
 
 for (const [key, icon] of Object.entries(icons)) {
   Handlebars.registerPartial(`icon_${key}`, icon);

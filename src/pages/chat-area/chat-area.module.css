@@ -19,9 +19,17 @@
   overflow: auto;
 }
 
-.chatFeed {
+.chatMain {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   padding: 0 2rem;
+}
+
+.startChat {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-text-secondary);
 }

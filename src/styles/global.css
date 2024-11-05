@@ -59,3 +59,15 @@ h4 {
   line-height: 1.6rem;
   font-weight: 500;
 }
+
+/* Button */
+
+.icon-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+}
