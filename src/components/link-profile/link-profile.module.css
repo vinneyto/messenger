@@ -6,4 +6,5 @@
   height: var(--chat-header-height);
   text-decoration: none;
   color: var(--color-text-secondary);
+  margin: 0 1rem;
 }

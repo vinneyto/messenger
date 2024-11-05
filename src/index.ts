@@ -10,6 +10,7 @@ import inputGroup from './components/input-group';
 import linkButton from './components/link-button';
 import linkProfile from './components/link-profile';
 import chatSearch from './components/chat-search';
+import chatItem from './components/chat-item';
 
 import * as icons from './components/icons';
 
@@ -18,6 +19,7 @@ import chatAreaPage from './pages/chat-area';
 import signInPage from './pages/sign-in';
 import signUpPage from './pages/sign-up';
 import notFound from './pages/not-found.hbs';
+import { chatItems } from './mockData';
 
 Handlebars.registerPartial('button', button);
 Handlebars.registerPartial('input', input);
@@ -25,6 +27,7 @@ Handlebars.registerPartial('inputGroup', inputGroup);
 Handlebars.registerPartial('linkButton', linkButton);
 Handlebars.registerPartial('linkProfile', linkProfile);
 Handlebars.registerPartial('chatSearch', chatSearch);
+Handlebars.registerPartial('chatItem', chatItem);
 
 for (const [key, icon] of Object.entries(icons)) {
   Handlebars.registerPartial(`icon_${key}`, icon);
@@ -55,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   new Router(
     [
-      makeRoute('/', chatAreaPage),
+      makeRoute('/', chatAreaPage, () => ({ chatItems })),
       makeRoute('/sign-in', signInPage, () =>
         urlParams.has('login') ? { errors: { login: 'Wrong login' } } : {},
       ),

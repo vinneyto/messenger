@@ -3,6 +3,12 @@
   <div class="{{cs.chatList}}">
     {{> linkProfile }}
     {{> chatSearch }}
+
+    <div class="{{cs.chatListItems}}">
+      {{#each chatItems}}
+        {{> chatItem name=this.name lastMessage=this.lastMessage}}
+      {{/each}}
+    </div>
   </div>
 
   <div class="{{cs.chatDialog}}"></div>

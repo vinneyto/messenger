@@ -7,10 +7,16 @@
 }
 
 .chatList {
+  display: flex;
+  flex-direction: column;
   width: var(--chat-list-width);
   background-color: var(--color-button-back);
   border-right: 1px solid var(--color-border);
-  padding: 0 1rem;
+}
+
+.chatListItems {
+  flex: 1;
+  overflow: auto;
 }
 
 .chatDialog {
