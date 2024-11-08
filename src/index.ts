@@ -22,6 +22,8 @@ import signUpPage from './pages/sign-up';
 import notFound from './pages/not-found.hbs';
 import { chatItems } from './mockData';
 import chatFooter from './components/chat-footer';
+import userProfile from './pages/user-profile';
+import profileBack from './components/profile-back';
 
 Handlebars.registerPartial('button', button);
 Handlebars.registerPartial('input', input);
@@ -32,6 +34,8 @@ Handlebars.registerPartial('chatSearch', chatSearch);
 Handlebars.registerPartial('chatItem', chatItem);
 Handlebars.registerPartial('chatHeader', chatHeader);
 Handlebars.registerPartial('chatFooter', chatFooter);
+Handlebars.registerPartial('userProfile', userProfile);
+Handlebars.registerPartial('profileBack', profileBack);
 
 for (const [key, icon] of Object.entries(icons)) {
   Handlebars.registerPartial(`icon_${key}`, icon);
@@ -63,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
   new Router(
     [
       makeRoute('/', chatAreaPage, () => ({ chatItems })),
+      makeRoute('/user-profile', userProfile),
       makeRoute('/sign-in', signInPage, () =>
         urlParams.has('login') ? { errors: { login: 'Wrong login' } } : {},
       ),
