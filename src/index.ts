@@ -29,7 +29,7 @@ import chatFooter from './components/chat-footer';
 import userProfile from './pages/user-profile';
 import userProfileData from './pages/user-profile-data';
 import userProfilePassword from './pages/user-profile-password';
-import { initForms, initLinks } from './utils/navigation';
+import { initForms } from './utils/navigation';
 
 Handlebars.registerPartial('button', button);
 Handlebars.registerPartial('input', input);
@@ -89,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
     { fallback: '/404' },
   );
 
-  initLinks(router);
   initForms(router);
 
   // init link buttons

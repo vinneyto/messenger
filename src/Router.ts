@@ -24,7 +24,7 @@ export class Router {
 
     document.addEventListener('click', (e: MouseEvent) => {
       const target = e.target as HTMLAnchorElement;
-      if (target.matches('[data-route]')) {
+      if (target.matches('[href]')) {
         e.preventDefault();
         const path = target.getAttribute('href');
         if (path) {
