@@ -28,6 +28,7 @@ import { chatItems } from './mockData';
 import chatFooter from './components/chat-footer';
 import userProfile from './pages/user-profile';
 import userProfileData from './pages/user-profile-data';
+import userProfilePassword from './pages/user-profile-password';
 
 Handlebars.registerPartial('button', button);
 Handlebars.registerPartial('input', input);
@@ -76,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
       makeRoute('/', chatAreaPage, () => ({ chatItems })),
       makeRoute('/user-profile', userProfile),
       makeRoute('/user-profile-data', userProfileData),
+      makeRoute('/user-profile-password', userProfilePassword),
       makeRoute('/sign-in', signInPage, () =>
         urlParams.has('login') ? { errors: { login: 'Wrong login' } } : {},
       ),
