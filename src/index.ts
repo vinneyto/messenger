@@ -24,6 +24,8 @@ import { chatItems } from './mockData';
 import chatFooter from './components/chat-footer';
 import userProfile from './pages/user-profile';
 import profileBack from './components/profile-back';
+import profileAvatar from './components/profile-avatar';
+import profileField from './components/profile-field';
 
 Handlebars.registerPartial('button', button);
 Handlebars.registerPartial('input', input);
@@ -36,6 +38,8 @@ Handlebars.registerPartial('chatHeader', chatHeader);
 Handlebars.registerPartial('chatFooter', chatFooter);
 Handlebars.registerPartial('userProfile', userProfile);
 Handlebars.registerPartial('profileBack', profileBack);
+Handlebars.registerPartial('profileAvatar', profileAvatar);
+Handlebars.registerPartial('profileField', profileField);
 
 for (const [key, icon] of Object.entries(icons)) {
   Handlebars.registerPartial(`icon_${key}`, icon);

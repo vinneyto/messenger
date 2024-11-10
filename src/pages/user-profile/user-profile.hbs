@@ -1,3 +1,30 @@
 <div class="{{cs.userProfile}}">
   {{> profileBack}}
+
+  <main class="{{cs.profileArea}}">
+    {{> profileAvatar}}
+
+    <h1>Jose</h1>
+
+    <section class="{{cs.section}}">
+      {{> profileField label="Email" value="jose@jose.es"}}
+      {{> profileField label="Login" value="josejose"}}
+      {{> profileField label="First name" value="Jose"}}
+      {{> profileField label="Second name" value="García López"}}
+      {{> profileField label="Nickname" value="joseus"}}
+      {{> profileField label="Phone" value="+34123456789"}}
+    </section>
+
+    <section class="{{cs.section}}">
+      <div class="setting-item">
+        <a href="/">Change data</a>
+      </div>
+      <div class="setting-item">
+        <a href="/">Change password</a>
+      </div>
+      <div class="setting-item">
+        <a class="alert" href="/">Exit</a>
+      </div>
+    </section>
+  </main>
 </div>
