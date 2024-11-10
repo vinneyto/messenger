@@ -23,7 +23,7 @@ import * as icons from './components/icons';
 import chatAreaPage from './pages/chat-area';
 import signInPage from './pages/sign-in';
 import signUpPage from './pages/sign-up';
-import notFound from './pages/not-found.hbs';
+import smthWrong from './pages/smth-wrong';
 import { chatItems } from './mockData';
 import chatFooter from './components/chat-footer';
 import userProfile from './pages/user-profile';
@@ -82,7 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
         urlParams.has('login') ? { errors: { login: 'Wrong login' } } : {},
       ),
       makeRoute('/sign-up', signUpPage),
-      makeRoute('/404', notFound),
+      makeRoute('/404', smthWrong, () => ({ code: 404 })),
+      makeRoute('/500', smthWrong, () => ({ code: 500 })),
     ],
     { fallback: '/404' },
   );

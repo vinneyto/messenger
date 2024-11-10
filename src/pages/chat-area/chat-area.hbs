@@ -4,11 +4,11 @@
     {{> chatLinkProfile href="/user-profile" }}
     {{> chatSearch }}
 
-    <div class="{{cs.sidebarChats}}">
+    <ul class="{{cs.sidebarChats}}">
       {{#each chatItems}}
         {{> chatItem name=this.name lastMessage=this.lastMessage}}
       {{/each}}
-    </div>
+    </ul>
   </nav>
 
   <main class="{{cs.chatMain}}">
