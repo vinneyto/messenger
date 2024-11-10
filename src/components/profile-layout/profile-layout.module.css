@@ -1,0 +1,10 @@
+.profileLayout {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+.profileArea {
+  flex-grow: 1;
+  margin-top: 50px;
+}

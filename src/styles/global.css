@@ -83,7 +83,7 @@ h5 {
   justify-content: center;
 }
 
-/* Input */
+/* Links */
 
 a {
   color: var(--color-active);
@@ -96,7 +96,15 @@ a {
 
 /* Profile setting */
 
-.setting-item {
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  max-width: 510px;
+  margin: 0 auto;
+  margin-bottom: 3rem;
+}
+
+.settings-section__item {
   display: flex;
   justify-content: space-between;
   font-size: calc(1rem + 1px);
@@ -106,4 +114,11 @@ a {
   &:last-child {
     border-bottom: none;
   }
+}
+
+.profile-submit {
+  display: block;
+  margin-top: 4rem;
+  width: 280px;
+  align-self: center;
 }

@@ -1,30 +1,24 @@
-<div class="{{cs.userProfile}}">
-  {{> profileBack}}
+{{#> profileLayout backHref="/"}}
+  <h1 class="{{cs.userName}}">Jose</h1>
 
-  <main class="{{cs.profileArea}}">
-    {{> profileAvatar}}
+  <section class="settings-section">
+    {{> profileField label="Email" value="jose@jose.es"}}
+    {{> profileField label="Login" value="josejose"}}
+    {{> profileField label="First name" value="Jose"}}
+    {{> profileField label="Second name" value="García López"}}
+    {{> profileField label="Nickname" value="joseus"}}
+    {{> profileField label="Phone" value="+34123456789"}}
+  </section>
 
-    <h1>Jose</h1>
-
-    <section class="{{cs.section}}">
-      {{> profileField label="Email" value="jose@jose.es"}}
-      {{> profileField label="Login" value="josejose"}}
-      {{> profileField label="First name" value="Jose"}}
-      {{> profileField label="Second name" value="García López"}}
-      {{> profileField label="Nickname" value="joseus"}}
-      {{> profileField label="Phone" value="+34123456789"}}
-    </section>
-
-    <section class="{{cs.section}}">
-      <div class="setting-item">
-        <a href="/">Change data</a>
-      </div>
-      <div class="setting-item">
-        <a href="/">Change password</a>
-      </div>
-      <div class="setting-item">
-        <a class="alert" href="/">Exit</a>
-      </div>
-    </section>
-  </main>
-</div>
+  <section class="settings-section">
+    <div class="settings-section__item">
+      <a href="/user-profile-data">Change data</a>
+    </div>
+    <div class="settings-section__item">
+      <a href="/">Change password</a>
+    </div>
+    <div class="settings-section__item">
+      <a class="alert" href="/sign-in">Exit</a>
+    </div>
+  </section>
+{{/profileLayout}}

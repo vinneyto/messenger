@@ -12,6 +12,10 @@ import chatLinkProfile from './components/chat-link-profile';
 import chatSearch from './components/chat-search';
 import chatItem from './components/chat-item';
 import chatHeader from './components/chat-header';
+import profileBack from './components/profile-back';
+import profileAvatar from './components/profile-avatar';
+import profileField from './components/profile-field';
+import profileLayout from './components/profile-layout';
 
 import * as icons from './components/icons';
 
@@ -23,9 +27,7 @@ import notFound from './pages/not-found.hbs';
 import { chatItems } from './mockData';
 import chatFooter from './components/chat-footer';
 import userProfile from './pages/user-profile';
-import profileBack from './components/profile-back';
-import profileAvatar from './components/profile-avatar';
-import profileField from './components/profile-field';
+import userProfileData from './pages/user-profile-data';
 
 Handlebars.registerPartial('button', button);
 Handlebars.registerPartial('input', input);
@@ -40,6 +42,7 @@ Handlebars.registerPartial('userProfile', userProfile);
 Handlebars.registerPartial('profileBack', profileBack);
 Handlebars.registerPartial('profileAvatar', profileAvatar);
 Handlebars.registerPartial('profileField', profileField);
+Handlebars.registerPartial('profileLayout', profileLayout);
 
 for (const [key, icon] of Object.entries(icons)) {
   Handlebars.registerPartial(`icon_${key}`, icon);
@@ -72,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     [
       makeRoute('/', chatAreaPage, () => ({ chatItems })),
       makeRoute('/user-profile', userProfile),
+      makeRoute('/user-profile-data', userProfileData),
       makeRoute('/sign-in', signInPage, () =>
         urlParams.has('login') ? { errors: { login: 'Wrong login' } } : {},
       ),
