@@ -7,7 +7,7 @@ import './index.css';
 import button from './components/button';
 import input from './components/input';
 import inputGroup from './components/input-group';
-import linkButton from './components/link-button';
+import linkButton, { initLinkButton } from './components/link-button';
 import chatLinkProfile from './components/chat-link-profile';
 import chatSearch from './components/chat-search';
 import chatItem from './components/chat-item';
@@ -29,6 +29,7 @@ import chatFooter from './components/chat-footer';
 import userProfile from './pages/user-profile';
 import userProfileData from './pages/user-profile-data';
 import userProfilePassword from './pages/user-profile-password';
+import { initForms, initLinks } from './utils/navigation';
 
 Handlebars.registerPartial('button', button);
 Handlebars.registerPartial('input', input);
@@ -72,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   };
 
-  new Router(
+  const router = new Router(
     [
       makeRoute('/', chatAreaPage, () => ({ chatItems })),
       makeRoute('/user-profile', userProfile),
@@ -87,4 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
     ],
     { fallback: '/404' },
   );
+
+  initLinks(router);
+  initForms(router);
+
+  // init link buttons
+  initLinkButton(router);
 });
