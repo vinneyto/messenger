@@ -1,0 +1,17 @@
+@import-normalize;
+@import-sanitize;
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+}
+
+p {
+  margin: 0;
+}

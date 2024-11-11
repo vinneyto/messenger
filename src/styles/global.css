@@ -1,0 +1,124 @@
+/* Typography */
+
+html,
+input,
+button,
+select,
+textarea {
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--color-text-base);
+  background-color: var(--color-text-on-dark);
+}
+
+h1 {
+  font-weight: 500px;
+  font-size: 3rem;
+  margin: 2rem 0;
+}
+
+h2 {
+  font-weight: 500px;
+  font-size: calc(1rem + 4px);
+  margin: 2rem 0;
+}
+
+h3 {
+  font-weight: 500px;
+  font-size: calc(1rem + 2px);
+  margin: 1rem 0;
+}
+
+h4 {
+  font-weight: 500;
+  font-size: calc(1rem + 1px);
+  margin: 0.5rem 0;
+}
+
+h5 {
+  font-weight: 500;
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+/* Layout */
+
+#app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+/* Popup */
+
+.popup {
+  box-shadow: 0px 0px 6px 0px #00000024;
+  border-radius: 1rem;
+  padding: 2.5rem;
+  background-color: var(--color-text-on-dark);
+  display: flex;
+  flex-direction: column;
+  width: 340px;
+}
+
+.popup-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.6rem;
+  line-height: 1.6rem;
+  font-weight: 500;
+}
+
+/* Button */
+
+.icon-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Links */
+
+a {
+  color: var(--color-active);
+  text-decoration: none;
+}
+
+.alert {
+  color: var(--color-alert-error);
+}
+
+/* Profile setting */
+
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  max-width: 510px;
+  margin: 0 auto;
+  margin-bottom: 3rem;
+}
+
+.settings-section__item {
+  display: flex;
+  justify-content: space-between;
+  font-size: calc(1rem + 1px);
+  line-height: 3;
+  border-bottom: 1px solid var(--color-border);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.profile-submit {
+  display: block;
+  margin-top: 4rem;
+  width: 280px;
+  align-self: center;
+}

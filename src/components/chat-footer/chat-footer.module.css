@@ -1,0 +1,30 @@
+.chatFooter {
+  display: flex;
+  align-items: center;
+  height: var(--chat-header-height);
+  border-top: 1px solid var(--color-border);
+  gap: 1rem;
+}
+
+.input {
+  flex: 1;
+  padding: 0.5rem;
+  border: none;
+  outline: none;
+  background-color: var(--color-input-background);
+  font-size: 1rem;
+  line-height: 32px;
+  border-radius: 30px;
+  padding: 0 1.5rem;
+
+  &::placeholder {
+    color: var(--color-text-secondary);
+  }
+}
+
+.buttonSend {
+  background-color: var(--color-active);
+  width: 32px;
+  height: 32px;
+  border-radius: 50px;
+}

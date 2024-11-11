@@ -1,0 +1,35 @@
+.chatArea {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  align-items: stretch;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: var(--chat-list-width);
+  background-color: var(--color-button-back);
+  border-right: 1px solid var(--color-border);
+}
+
+.sidebarChats {
+  flex: 1;
+  overflow: auto;
+}
+
+.chatMain {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 0 2rem;
+}
+
+.startChat {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-text-secondary);
+}

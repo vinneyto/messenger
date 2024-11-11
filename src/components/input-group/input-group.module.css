@@ -1,0 +1,24 @@
+.inputGroup {
+  position: relative;
+  margin-top: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.label {
+  line-height: 0.8rem;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  position: absolute;
+  top: -1rem;
+  display: none; /* TODO: remove */
+}
+
+.labelVisible {
+  display: block;
+}
+
+.errorMessage {
+  line-height: 2rem;
+  font-size: 0.8rem;
+  color: var(--color-alert-error);
+}

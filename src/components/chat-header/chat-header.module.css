@@ -1,0 +1,19 @@
+.chatHeader {
+  display: flex;
+  align-items: center;
+  height: var(--chat-header-height);
+  border-bottom: 1px solid var(--color-border);
+  gap: 0.5rem;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: var(--color-input-background);
+}
+
+.dropdownTrigger {
+  padding: 1rem;
+  margin-left: auto;
+}

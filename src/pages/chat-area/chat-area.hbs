@@ -1,0 +1,20 @@
+<div class="{{ cs.chatArea }}">
+  <nav class="{{ cs.sidebar }}">
+    {{> chatLinkProfile href="/user-profile" }}
+    {{> chatSearch }}
+
+    <ul class="{{ cs.sidebarChats }}">
+      {{#each chatItems}}
+      {{> chatItem name=this.name lastMessage=this.lastMessage}}
+      {{/each}}
+    </ul>
+  </nav>
+
+  <main class="{{ cs.chatMain }}">
+    {{> chatHeader }}
+
+    <div class="{{ cs.startChat }}">Select chat to send a message</div>
+
+    {{> chatFooter }}
+  </main>
+</div>

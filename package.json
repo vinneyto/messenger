@@ -1,0 +1,28 @@
+{
+  "name": "messenger",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "start": "npm run build && serve -s dist -l 3000",
+    "dev": "vite",
+    "build": "tsc && vite build --emptyOutDir",
+    "preview": "vite preview",
+    "prettify": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,html,md,hbs}'"
+  },
+  "devDependencies": {
+    "@types/node": "^22.8.6",
+    "postcss-normalize": "^13.0.1",
+    "postcss-preset-env": "^10.0.8",
+    "prettier": "^3.3.3",
+    "serve": "^14.2.4",
+    "typescript": "~5.6.2",
+    "vite": "^5.4.10"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.8"
+  }
+}
