@@ -26,14 +26,14 @@
 
 ### Доступные страницы
 
-  - [Список чатов](https://vinneyto-messenger.netlify.app)
-  - [Авторизация](https://vinneyto-messenger.netlify.app/sign-in)
-  - [Регистрация](https://vinneyto-messenger.netlify.app/sign-up)
-  - [Профиль пользователя](https://vinneyto-messenger.netlify.app/user-profile)
-  - [Данные пользователя](https://vinneyto-messenger.netlify.app/user-profile-data)
-  - [Сброс пароля](https://vinneyto-messenger.netlify.app/user-profile-password)
-  - [Ошибка 404](https://vinneyto-messenger.netlify.app/404)
-  - [Ошибка 500](https://vinneyto-messenger.netlify.app/500)
+- [Список чатов](https://vinneyto-messenger.netlify.app)
+- [Авторизация](https://vinneyto-messenger.netlify.app/sign-in)
+- [Регистрация](https://vinneyto-messenger.netlify.app/sign-up)
+- [Профиль пользователя](https://vinneyto-messenger.netlify.app/user-profile)
+- [Данные пользователя](https://vinneyto-messenger.netlify.app/user-profile-data)
+- [Сброс пароля](https://vinneyto-messenger.netlify.app/user-profile-password)
+- [Ошибка 404](https://vinneyto-messenger.netlify.app/404)
+- [Ошибка 500](https://vinneyto-messenger.netlify.app/500)
 
 ### Структура проекта
 

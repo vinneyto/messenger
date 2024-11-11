@@ -10,7 +10,8 @@
     "start": "npm run build && serve -s dist -l 3000",
     "dev": "vite",
     "build": "tsc && vite build --emptyOutDir",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prettify": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,html,md,hbs}'"
   },
   "devDependencies": {
     "@types/node": "^22.8.6",

@@ -4,8 +4,15 @@
   "useTabs": false,
   "overrides": [
     {
-      "files": ["*.html", "*.css", "*.hbs"],
+      "files": ["*.html", "*.css"],
       "options": {
+        "singleQuote": false
+      }
+    },
+    {
+      "files": "**/*.hbs",
+      "options": {
+        "parser": "angular",
         "singleQuote": false
       }
     }
