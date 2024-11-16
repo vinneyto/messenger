@@ -1,0 +1,12 @@
+.button {
+  border: none;
+  background-color: var(--color-active);
+  color: var(--color-text-on-dark);
+  font-size: calc(1rem + 1px);
+  line-height: 3rem;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 0 0.5rem;
+}

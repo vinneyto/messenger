@@ -1,0 +1,10 @@
+.chatLinkProfile {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  gap: 0.5rem;
+  height: var(--chat-header-height);
+  text-decoration: none;
+  color: var(--color-text-secondary);
+  margin: 0 1rem;
+}

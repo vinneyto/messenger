@@ -1,0 +1,13 @@
+.linkButton {
+  border: none;
+  color: var(--color-active);
+  font-size: calc(1rem + 1px);
+  line-height: 3rem;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 8px;
+  display: block;
+  text-decoration: none;
+  width: 100%;
+}
