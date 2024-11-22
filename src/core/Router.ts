@@ -1,4 +1,4 @@
-type Route = {
+export type Route = {
   path: string;
   action: () => void;
 };

@@ -1,5 +1,6 @@
 import { v4 } from 'uuid';
 import { EventBus } from './EventBus';
+import { BlockRenderTarget } from './BlockRenderTarget';
 
 export type BlockEventMap<Props> = {
   init: [];
@@ -17,28 +18,6 @@ export type BlockEvents = {
   [K in keyof HTMLElementEventMap]?: (event: HTMLElementEventMap[K]) => void;
 };
 
-/**
- * Dynamic render target for block
- */
-export class BlockRenderTarget {
-  constructor(
-    private readonly block: Block,
-    private target: HTMLElement,
-  ) {
-    this._replaceTarget();
-    block.eventBus.on('flow:component-did-update', this._replaceTarget);
-  }
-
-  private _replaceTarget = () => {
-    this.target.replaceWith(this.block.element);
-    this.target = this.block.element;
-  };
-
-  destroy() {
-    this.block.eventBus.off('flow:component-did-update', this._replaceTarget);
-  }
-}
-
 export abstract class Block<
   Props extends DefaultProps = DefaultProps,
   EventMap extends BlockEventMap<Props> = BlockEventMap<Props>,
@@ -47,12 +26,13 @@ export abstract class Block<
 
   public readonly eventBus: EventBus<EventMap>;
 
+  private readonly _renderTarget: BlockRenderTarget;
+
   private _props: Props;
   private _events: BlockEvents = {};
-  private _element: HTMLElement | null = null;
+  private _element: Element | null = null;
   private _domEvents: { [key: string]: EventListener } = {};
   private _children: Record<string, Block> = {};
-  private _childrenTargets: BlockRenderTarget[] = [];
 
   constructor(props: Props, events: BlockEvents = {}) {
     this._props = this._makePropsProxy(props);
@@ -60,6 +40,7 @@ export abstract class Block<
     this._events = events;
 
     this.eventBus = new EventBus<EventMap>();
+    this._renderTarget = new BlockRenderTarget(this as Block<any, any>);
 
     this._registerEvents(this.eventBus);
     this.eventBus.emit('init');
@@ -73,11 +54,15 @@ export abstract class Block<
     eventBus.on('flow:render', this._render);
   }
 
-  _init = () => {
-    if (this._element) {
-      throw new Error('Life circle already started');
-    }
+  mount(target: Element, replace = false) {
+    this._renderTarget.mount(target, replace);
+  }
 
+  unmount() {
+    this._renderTarget.unmount();
+  }
+
+  _init = () => {
     // first render
     this.eventBus.emit('flow:render');
   };
@@ -130,51 +115,36 @@ export abstract class Block<
     Object.assign(this.props, nextProps);
   };
 
-  private _addDOMEvents() {
-    if (!this._element) {
-      throw new Error('Element is not created');
-    }
-
+  private _addDOMEvents(element: Element) {
     for (const [eventName, callback] of Object.entries(this._events)) {
-      this._element.addEventListener(eventName, callback as EventListener);
+      element.addEventListener(eventName, callback as EventListener);
       this._domEvents[eventName] = callback as EventListener;
     }
   }
 
-  private _removeDOMEvents() {
-    if (!this._element) {
-      return;
-    }
-
+  private _removeDOMEvents(element: Element) {
     for (const [eventName, callback] of Object.entries(this._domEvents)) {
-      this._element.removeEventListener(eventName, callback);
+      element.removeEventListener(eventName, callback);
     }
     this._domEvents = {};
   }
 
-  private _unsubscribeChildren() {
-    this._childrenTargets.forEach((target) => target.destroy());
-    this._childrenTargets = [];
-  }
-
   private _render = () => {
-    this._unsubscribeChildren();
+    if (this._element) {
+      this._removeDOMEvents(this._element);
+    }
 
     const block = this.render();
 
-    if (block.children.length !== 1) {
-      throw new Error(
-        "Block must have only one root element, we don't support fragments yet",
-      );
+    this._element = block.firstElementChild;
+
+    if (!this._element) {
+      throw new Error('Element is not created');
     }
-
-    this._removeDOMEvents();
-
-    this._element = block.firstElementChild as HTMLElement;
 
     this._element.setAttribute('data-id', this.id);
 
-    this._addDOMEvents();
+    this._addDOMEvents(this._element);
 
     this.eventBus.emit('flow:component-did-update');
   };
@@ -206,12 +176,12 @@ export abstract class Block<
     // mount children
     for (const child of Object.values(this._children)) {
       const stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
-      if (!stub) {
-        throw new Error('Stub not found');
+
+      if (stub) {
+        child.mount(stub, true);
+      } else {
+        child.unmount();
       }
-      this._childrenTargets.push(
-        new BlockRenderTarget(child, stub as HTMLElement),
-      );
     }
 
     return fragment.content;
@@ -221,8 +191,9 @@ export abstract class Block<
   abstract render(): DocumentFragment;
 
   destroy() {
-    this._removeDOMEvents();
-    this._unsubscribeChildren();
+    if (this._element) {
+      this._removeDOMEvents(this._element);
+    }
 
     for (const child of Object.values(this._children)) {
       child.destroy();
@@ -236,6 +207,8 @@ export abstract class Block<
     );
     this.eventBus.off('flow:component-did-update', this._componentDidUpdate);
     this.eventBus.off('flow:render', this._render);
+
+    this._renderTarget.unsubscribe();
   }
 
   private _makePropsProxy(props: Props) {
@@ -246,13 +219,14 @@ export abstract class Block<
         const oldProps = { ...target };
         target[prop as keyof Props] = value as Props[keyof Props];
 
-        if (value instanceof Block) {
-          const oldBlock = self._children[prop as string];
+        const oldBlock = self._children[prop as string];
+        if (oldBlock instanceof Block) {
+          // The block manages its own children
+          oldBlock.unmount();
+          oldBlock.destroy();
+        }
 
-          if (oldBlock) {
-            oldBlock.destroy();
-          }
-
+        if (value instanceof Block || oldBlock instanceof Block) {
           self._children = self._collectChildren(target);
         }
 

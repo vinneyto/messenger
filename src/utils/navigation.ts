@@ -1,4 +1,4 @@
-import { Router } from '../Router';
+import { Router } from '../core/Router';
 
 export function initForms(router: Router) {
   document.addEventListener('submit', (e) => {

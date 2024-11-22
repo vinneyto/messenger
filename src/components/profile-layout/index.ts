@@ -1,4 +1,4 @@
-import { styled } from '../../styled';
+import { styled } from '../../core/styled';
 import tpl from './profile-layout.hbs';
 import cs from './profile-layout.module.css';
 

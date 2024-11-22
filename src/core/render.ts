@@ -1,4 +1,4 @@
-import { Block, BlockRenderTarget } from './Block';
+import { Block } from './Block';
 
 export function render(query: string, block: Block<any, any>) {
   const root = document.querySelector(query);
@@ -7,10 +7,7 @@ export function render(query: string, block: Block<any, any>) {
     throw new Error('Root element not found');
   }
 
-  const stub = document.createElement('div');
-  root.appendChild(stub);
-
-  new BlockRenderTarget(block, stub);
+  block.mount(root);
 
   block.dispatchComponentDidMount();
 }
