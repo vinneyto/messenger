@@ -46,6 +46,14 @@ export abstract class Block<
     this.eventBus.emit('init');
   }
 
+  setEvents(events: BlockEvents) {
+    this._removeDOMEvents(this.element);
+
+    this._events = events;
+
+    this._addDOMEvents(this.element);
+  }
+
   private _registerEvents(eventBus: EventBus<EventMap>) {
     eventBus.on('init', this._init);
     eventBus.on('flow:component-did-mount', this._componentDidMount);

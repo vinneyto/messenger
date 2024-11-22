@@ -1,15 +1,28 @@
+import { InputGroupBlock } from '../../components/input-group/InputGroupBlock';
 import { Block } from '../../core';
 import { styled } from '../../core';
 import signInTpl from './sign-in.hbs';
 import cs from './sign-in.module.css';
 
 export type SignInProps = {
-  errors?: Record<string, string>;
+  readonly loginInput: InputGroupBlock;
+  readonly passwordInput: InputGroupBlock;
 };
 
 export class SignInBlock extends Block<SignInProps> {
-  constructor(props: SignInProps) {
-    super(props);
+  constructor() {
+    super({
+      loginInput: new InputGroupBlock({
+        id: 'login',
+        name: 'login',
+        label: 'Login',
+      }),
+      passwordInput: new InputGroupBlock({
+        id: 'password',
+        name: 'password',
+        label: 'Password',
+      }),
+    });
   }
 
   render() {

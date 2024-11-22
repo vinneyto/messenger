@@ -2,8 +2,8 @@
   <h2 class="popup-title">Sign in</h2>
 
   <form action="/" method="get">
-    {{> inputGroup id="login" name="login" label="Login" type="text" errorMessage=errors.login}}
-    {{> inputGroup id="password" name="password" label="Password" type="password"}}
+    {{{ loginInput }}}
+    {{{ passwordInput }}}
 
     {{> button label="Sign in" className=cs.submitButton type="submit"}}
     {{> linkButton label="Don't have an account?" className=cs.signUpLink href="/sign-up"}}
