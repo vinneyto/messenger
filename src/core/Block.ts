@@ -187,7 +187,6 @@ export abstract class Block<
     return fragment.content;
   }
 
-  // Может переопределять пользователь, необязательно трогать
   abstract render(): DocumentFragment;
 
   destroy() {
@@ -222,7 +221,6 @@ export abstract class Block<
         const oldBlock = self._children[prop as string];
         if (oldBlock instanceof Block) {
           // The block manages its own children
-          oldBlock.unmount();
           oldBlock.destroy();
         }
 

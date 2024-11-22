@@ -1,6 +1,6 @@
 import { Block } from '../../core';
 import { chatItems } from '../../mockData';
-import { styled } from '../../core/styled';
+import { styled } from '../../core';
 import tpl from './chat-area.hbs';
 import cs from './chat-area.module.css';
 

@@ -1,4 +1,4 @@
-import { styled } from '../../core/styled';
+import { styled } from '../../core';
 import inputGroupTpl from './input-group.hbs';
 import cs from './input-group.module.css';
 

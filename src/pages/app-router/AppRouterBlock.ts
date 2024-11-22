@@ -1,7 +1,7 @@
 import { initLinkButton } from '../../components/link-button';
 import { Block } from '../../core';
 import { Router } from '../../core/Router';
-import { styled } from '../../core/styled';
+import { styled } from '../../core';
 import { initForms } from '../../utils/navigation';
 import { ChatAreaBlock } from '../chat-area';
 import { SignInBlock } from '../sign-in';

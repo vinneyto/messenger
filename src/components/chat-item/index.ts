@@ -1,4 +1,4 @@
-import { styled } from '../../core/styled';
+import { styled } from '../../core';
 import tpl from './chat-item.hbs';
 import cs from './chat-item.module.css';
 

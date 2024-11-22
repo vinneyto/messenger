@@ -1,5 +1,5 @@
 import { Router } from '../../core/Router';
-import { styled } from '../../core/styled';
+import { styled } from '../../core';
 import tpl from './link-button.hbs';
 import cs from './link-button.module.css';
 

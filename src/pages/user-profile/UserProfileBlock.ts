@@ -1,4 +1,4 @@
-import { styled } from '../../core/styled';
+import { styled } from '../../core';
 import { Block } from '../../core';
 import tpl from './user-profile.hbs';
 import cs from './user-profile.module.css';

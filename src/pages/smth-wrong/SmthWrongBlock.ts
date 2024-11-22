@@ -1,5 +1,5 @@
 import { Block } from '../../core';
-import { styled } from '../../core/styled';
+import { styled } from '../../core';
 import tpl from './smth-wrong.hbs';
 import cs from './smth-wrong.module.css';
 

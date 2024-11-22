@@ -1,5 +1,5 @@
 import { Block } from '../../core';
-import { styled } from '../../core/styled';
+import { styled } from '../../core';
 import signInTpl from './sign-in.hbs';
 import cs from './sign-in.module.css';
 
