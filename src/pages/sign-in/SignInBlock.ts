@@ -1,8 +1,10 @@
 import { Button } from '../../components/button';
 import { InputGroup } from '../../components/input-group';
 import { LinkButton } from '../../components/link-button';
+import { LOGIN_REGEX, PASSWORD_REGEX } from '../../constants';
 import { Block, Router } from '../../core';
 import { styled } from '../../core';
+import { validate } from '../../utils/validate';
 import signInTpl from './sign-in.hbs';
 import cs from './sign-in.module.css';
 
@@ -20,11 +22,13 @@ export class SignInBlock extends Block<SignInProps> {
         id: 'login',
         name: 'login',
         label: 'Login',
+        validation: LOGIN_REGEX,
       }),
       passwordInput: new InputGroup({
         id: 'password',
         name: 'password',
         label: 'Password',
+        validation: PASSWORD_REGEX,
       }),
       signInButton: new Button({
         type: 'submit',
@@ -36,12 +40,24 @@ export class SignInBlock extends Block<SignInProps> {
         className: cs.signUpLink,
       }),
     });
+
+    this.props.signUpButton.eventBus.on('click', this._onSignUpClick);
+
+    this.setEvents({ submit: this._onSubmit });
   }
 
   private _onSubmit = (e: Event) => {
     e.preventDefault();
 
-    this.router.navigate('/');
+    const valid = validate(this.props);
+
+    if (!valid) {
+      return;
+    }
+
+    setTimeout(() => {
+      this.router.navigate('/');
+    }, 500);
   };
 
   private _onSignUpClick = () => {
@@ -49,10 +65,6 @@ export class SignInBlock extends Block<SignInProps> {
   };
 
   render() {
-    this.props.signUpButton.props.onClick = this._onSignUpClick;
-
-    this.setEvents({ submit: this._onSubmit });
-
     return this.compile(styled(signInTpl, cs), this.props);
   }
 }

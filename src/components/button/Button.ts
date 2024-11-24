@@ -1,33 +1,28 @@
-import { Block } from '../../core';
+import { Block, BlockEventMap } from '../../core';
 import { styled } from '../../core';
 import tpl from './button.hbs';
 import cs from './button.module.css';
 
 export type ButtonProps = {
-  readonly type: 'button' | 'submit' | 'reset';
-  readonly label: string;
-  readonly className?: string;
-  readonly onClick?: (e: MouseEvent) => void;
+  type: 'button' | 'submit' | 'reset';
+  label: string;
+  className?: string;
 };
 
-export class Button extends Block<ButtonProps> {
+export interface ButtonEvents extends BlockEventMap<ButtonProps> {
+  click: [MouseEvent];
+}
+
+export class Button extends Block<ButtonProps, ButtonEvents> {
   constructor(props: ButtonProps) {
     super(props);
+
+    this.setEvents({ click: this._onClick });
   }
 
-  componentShouldUpdate(oldProps: ButtonProps, newProps: ButtonProps) {
-    this.setEvents({ click: this.props.onClick });
-
-    if (
-      oldProps.label !== newProps.label ||
-      oldProps.className !== newProps.className ||
-      oldProps.type !== newProps.type
-    ) {
-      return true;
-    }
-
-    return false;
-  }
+  private _onClick = (e: MouseEvent) => {
+    this.eventBus.emit('click', e);
+  };
 
   render() {
     return this.compile(styled(tpl, cs), this.props);

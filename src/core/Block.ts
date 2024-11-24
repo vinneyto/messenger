@@ -168,6 +168,10 @@ export abstract class Block<
       this._removeDOMEvents(this._element);
     }
 
+    for (const child of Object.values(this._children)) {
+      child.unmount();
+    }
+
     const block = this.render();
 
     this._element = block.firstElementChild;
@@ -207,8 +211,6 @@ export abstract class Block<
 
       if (stub) {
         child.mount(stub, true);
-      } else {
-        child.unmount();
       }
     }
 
@@ -248,6 +250,10 @@ export abstract class Block<
       set(target, prop, value) {
         const oldProps = { ...target };
         target[prop as keyof Props] = value as Props[keyof Props];
+
+        if (oldProps[prop as keyof Props] === value) {
+          return true;
+        }
 
         const oldBlock = self._children[prop as string];
         if (oldBlock instanceof Block) {

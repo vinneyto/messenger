@@ -36,7 +36,7 @@ export class AppRouterBlock extends Block<AppRouterProps> {
         route('/user-profile-data', () => new UserProfileDataBlock()),
         route('/user-profile-password', () => new UserProfilePasswordBlock()),
         route('/sign-in', (router) => new SignInBlock(router)),
-        route('/sign-up', () => new SignUpBlock()),
+        route('/sign-up', (router) => new SignUpBlock(router)),
         route('/404', () => new SmthWrongBlock({ code: 404 })),
         route('/500', () => new SmthWrongBlock({ code: 500 })),
       ],
