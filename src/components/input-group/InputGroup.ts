@@ -92,4 +92,8 @@ export class InputGroup extends Block<InputGroupProps> {
   getValue() {
     return this.props.input.getValue();
   }
+
+  getName() {
+    return this.props.input.getName();
+  }
 }

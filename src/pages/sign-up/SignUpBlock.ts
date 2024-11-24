@@ -99,7 +99,7 @@ export class SignUpBlock extends Block<SignUpBlockProps> {
   private _onSubmit = (e: Event) => {
     e.preventDefault();
 
-    let valid = validate(this.props);
+    let [valid] = validate(this.props);
 
     const { passwordInput, confirmPasswordInput } = this.props;
     confirmPasswordInput.setProps({ errorMessage: undefined });

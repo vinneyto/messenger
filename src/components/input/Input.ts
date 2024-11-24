@@ -63,4 +63,8 @@ export class Input extends Block<InputProps, InputEventMap> {
   getValue() {
     return this.props.value || '';
   }
+
+  getName() {
+    return this.props.name;
+  }
 }

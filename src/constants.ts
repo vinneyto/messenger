@@ -5,3 +5,4 @@ export const SECOND_NAME_REGEX = /^[A-ZА-Я][a-zа-я-]*$/;
 export const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 export const PHONE_REGEX = /^\+?\d{10,15}$/;
 export const MESSAGE_REGEX = /^(?!\s*$).+/;
+export const DISPLAY_NAME_REGEX = /^(?!\s*$).+/;

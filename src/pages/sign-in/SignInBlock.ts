@@ -28,6 +28,7 @@ export class SignInBlock extends Block<SignInProps> {
         id: 'password',
         name: 'password',
         label: 'Password',
+        type: 'password',
         validation: PASSWORD_REGEX,
       }),
       signInButton: new Button({
