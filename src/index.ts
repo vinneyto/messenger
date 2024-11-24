@@ -22,6 +22,7 @@ import * as icons from './components/icons';
 import chatFooter from './components/chat-footer';
 import { render } from './core/render';
 import { AppRouterBlock } from './pages/app-router';
+import { Block } from './core';
 
 Handlebars.registerPartial('button', button);
 Handlebars.registerPartial('input', input);
@@ -41,6 +42,8 @@ Handlebars.registerPartial('profileLayout', profileLayout);
 for (const [key, icon] of Object.entries(icons)) {
   Handlebars.registerPartial(`icon_${key}`, icon);
 }
+
+Block.initHandlebarsHelpers();
 
 document.addEventListener('DOMContentLoaded', () => {
   const appRouter = new AppRouterBlock();

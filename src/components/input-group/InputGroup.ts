@@ -11,7 +11,7 @@ export type InputGroupProps = {
   errorMessage?: string;
 };
 
-export class InputGroupBlock extends Block<InputGroupProps> {
+export class InputGroup extends Block<InputGroupProps> {
   constructor(props: InputGroupProps) {
     super(props);
 

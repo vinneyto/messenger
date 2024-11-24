@@ -32,7 +32,6 @@ export class BlockRenderTarget {
   };
 
   private _addIntoTarget = (target: Element) => {
-    target.innerHTML = '';
     target.appendChild(this.block.element);
 
     this.target = this.block.element;

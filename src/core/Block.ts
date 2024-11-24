@@ -1,3 +1,4 @@
+import Handlebars from 'handlebars/runtime';
 import { v4 } from 'uuid';
 import { EventBus } from './EventBus';
 import { BlockRenderTarget } from './BlockRenderTarget';
@@ -22,6 +23,15 @@ export abstract class Block<
   Props extends DefaultProps = DefaultProps,
   EventMap extends BlockEventMap<Props> = BlockEventMap<Props>,
 > {
+  public static initHandlebarsHelpers() {
+    Handlebars.registerHelper('block', function (block?: Block) {
+      if (!block || !(block instanceof Block)) {
+        return '';
+      }
+      return new Handlebars.SafeString(`<div data-id="${block.id}"></div>`);
+    });
+  }
+
   public readonly id = v4();
 
   public readonly eventBus: EventBus<EventMap>;
@@ -43,15 +53,10 @@ export abstract class Block<
     this._renderTarget = new BlockRenderTarget(this as Block<any, any>);
 
     this._registerEvents(this.eventBus);
-    this.eventBus.emit('init');
   }
 
   setEvents(events: BlockEvents) {
-    this._removeDOMEvents(this.element);
-
     this._events = events;
-
-    this._addDOMEvents(this.element);
   }
 
   private _registerEvents(eventBus: EventBus<EventMap>) {
@@ -62,7 +67,14 @@ export abstract class Block<
     eventBus.on('flow:render', this._render);
   }
 
+  private _initialized = false;
+
   mount(target: Element, replace = false) {
+    if (!this._initialized) {
+      this._initialized = true;
+      this.eventBus.emit('init');
+    }
+
     this._renderTarget.mount(target, replace);
   }
 
@@ -120,11 +132,25 @@ export abstract class Block<
   componentDidUpdate() {}
 
   setProps = (nextProps: Partial<Props>) => {
+    this._collapsePropsUpdate = true;
+
+    const prevProps = { ...this.props };
+
     Object.assign(this.props, nextProps);
+
+    if (this._propsChanged) {
+      this.eventBus.emit('flow:component-should-update', prevProps, this.props);
+    }
+
+    this._propsChanged = false;
+    this._collapsePropsUpdate = false;
   };
 
   private _addDOMEvents(element: Element) {
     for (const [eventName, callback] of Object.entries(this._events)) {
+      if (!callback) {
+        continue;
+      }
       element.addEventListener(eventName, callback as EventListener);
       this._domEvents[eventName] = callback as EventListener;
     }
@@ -170,16 +196,10 @@ export abstract class Block<
     template: Handlebars.TemplateDelegate,
     props: Record<string, any>,
   ): DocumentFragment {
-    // generate stubs
-    const propsAndStubs: Record<string, unknown> = { ...props };
-    for (const [key, child] of Object.entries(this._children)) {
-      propsAndStubs[key] = `<div data-id="${child.id}"></div>`;
-    }
-
     // run template
     const fragment = document.createElement('template');
 
-    fragment.innerHTML = template(propsAndStubs);
+    fragment.innerHTML = template(props);
 
     // mount children
     for (const child of Object.values(this._children)) {
@@ -218,6 +238,9 @@ export abstract class Block<
     this._renderTarget.unsubscribe();
   }
 
+  private _collapsePropsUpdate = false;
+  private _propsChanged = false;
+
   private _makePropsProxy(props: Props) {
     const self = this;
 
@@ -236,6 +259,11 @@ export abstract class Block<
           self._children = self._collectChildren(target);
         }
 
+        if (self._collapsePropsUpdate) {
+          self._propsChanged = true;
+          return true;
+        }
+
         self.eventBus.emit('flow:component-should-update', oldProps, target);
 
         return true;
@@ -252,7 +280,7 @@ export abstract class Block<
 
   get element() {
     if (!this._element) {
-      throw new Error('Element is not created');
+      throw new Error('Component is not initialized');
     }
     return this._element;
   }

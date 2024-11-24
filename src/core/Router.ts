@@ -1,6 +1,6 @@
 export type Route = {
   path: string;
-  action: () => void;
+  action: (router: Router) => void;
 };
 
 export interface RouterParams {
@@ -52,6 +52,6 @@ export class Router {
       throw new Error('unable to navigate');
     }
 
-    route.action();
+    route.action(this);
   }
 }

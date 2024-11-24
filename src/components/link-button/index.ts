@@ -19,3 +19,5 @@ export function initLinkButton(router: Router) {
 }
 
 export default styled(tpl, cs);
+
+export * from './LinkButton';
