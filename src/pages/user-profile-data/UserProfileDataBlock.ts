@@ -1,4 +1,3 @@
-import { Router } from '../../core';
 import { InputGroup } from '../../components/input-group';
 import { Button } from '../../components/button';
 import tpl from './user-profile-data.hbs';
@@ -29,7 +28,7 @@ export type UserProfileDataBlockProps = {
 export class UserProfileDataBlock extends ProfileLayout<
   UserProfileDataBlockProps & ProfileLayoutProps
 > {
-  constructor(private readonly router: Router) {
+  constructor() {
     super({
       emailInput: new InputGroup({
         id: 'email',
@@ -89,8 +88,8 @@ export class UserProfileDataBlock extends ProfileLayout<
     validate(this.props);
   };
 
-  goBack(): void {
-    this.router.navigate('/user-profile');
+  getBackHref() {
+    return '/user-profile';
   }
 
   renderContent() {

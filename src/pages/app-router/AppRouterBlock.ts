@@ -31,20 +31,14 @@ export class AppRouterBlock extends Block<AppRouterProps> {
 
     new Router(
       [
-        route('/', (router) => new ChatAreaBlock(router)),
-        route('/user-profile', (router) => new UserProfileBlock(router)),
-        route(
-          '/user-profile-data',
-          (router) => new UserProfileDataBlock(router),
-        ),
-        route(
-          '/user-profile-password',
-          (router) => new UserProfilePasswordBlock(router),
-        ),
+        route('/', () => new ChatAreaBlock()),
+        route('/user-profile', () => new UserProfileBlock()),
+        route('/user-profile-data', () => new UserProfileDataBlock()),
+        route('/user-profile-password', () => new UserProfilePasswordBlock()),
         route('/sign-in', (router) => new SignInBlock(router)),
         route('/sign-up', (router) => new SignUpBlock(router)),
-        route('/404', (router) => new SmthWrongBlock(router, { code: 404 })),
-        route('/500', (router) => new SmthWrongBlock(router, { code: 500 })),
+        route('/404', () => new SmthWrongBlock({ code: 404 })),
+        route('/500', () => new SmthWrongBlock({ code: 500 })),
       ],
       { fallback: '/404' },
     );

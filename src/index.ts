@@ -14,7 +14,6 @@ import chatHeader from './components/chat-header';
 import profileBack from './components/profile-back';
 import profileAvatar from './components/profile-avatar';
 import profileField from './components/profile-field';
-import profileLayout from './components/profile-layout';
 
 import * as icons from './components/icons';
 

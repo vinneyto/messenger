@@ -7,7 +7,6 @@ import {
   ProfileLayout,
   ProfileLayoutProps,
 } from '../../components/profile-layout';
-import { Router } from '../../core';
 
 export type UserProfilePasswordBlockProps = {
   readonly oldPasswordInput: InputGroup;
@@ -19,7 +18,7 @@ export type UserProfilePasswordBlockProps = {
 export class UserProfilePasswordBlock extends ProfileLayout<
   UserProfilePasswordBlockProps & ProfileLayoutProps
 > {
-  constructor(private readonly router: Router) {
+  constructor() {
     super({
       oldPasswordInput: new InputGroup({
         id: 'oldPassword',
@@ -69,8 +68,8 @@ export class UserProfilePasswordBlock extends ProfileLayout<
     }
   };
 
-  goBack() {
-    this.router.navigate('/user-profile');
+  getBackHref() {
+    return '/user-profile';
   }
 
   renderContent() {

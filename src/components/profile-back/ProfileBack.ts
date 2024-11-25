@@ -1,25 +1,16 @@
-import { Block, BlockEventMap } from '../../core';
+import { Block } from '../../core';
 import { styled } from '../../core';
 import tpl from './profile-back.hbs';
 import cs from './profile-back.module.css';
 
-export type ProfileBackProps = {};
+export type ProfileBackProps = {
+  href: string;
+};
 
-export interface ProfileBackEventMap extends BlockEventMap<ProfileBackProps> {
-  click: [ProfileBack];
-}
-
-export class ProfileBack extends Block<ProfileBackProps, ProfileBackEventMap> {
-  constructor() {
-    super({});
-
-    this.setEvents({ click: this._onClick });
+export class ProfileBack extends Block<ProfileBackProps> {
+  constructor(props: ProfileBackProps) {
+    super(props);
   }
-
-  private _onClick = (e: Event) => {
-    e.preventDefault();
-    this.eventBus.emit('click', this);
-  };
 
   render() {
     return this.compile(styled(tpl, cs), this.props);

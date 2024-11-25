@@ -1,4 +1,4 @@
-import { Block, Router } from '../../core';
+import { Block } from '../../core';
 import { chatItems } from '../../mockData';
 import { styled } from '../../core';
 import tpl from './chat-area.hbs';
@@ -19,7 +19,7 @@ export type ChatAreaProps = {
 };
 
 export class ChatAreaBlock extends Block<ChatAreaProps> {
-  constructor(private readonly router: Router) {
+  constructor() {
     super({
       chatItems,
       linkProfile: new ChatLinkProfile(),
@@ -27,13 +27,7 @@ export class ChatAreaBlock extends Block<ChatAreaProps> {
       header: new ChatHeader(),
       footer: new ChatFooter(),
     });
-
-    this.props.linkProfile.eventBus.on('click', this._onClickProfile);
   }
-
-  private _onClickProfile = () => {
-    this.router.navigate('/user-profile');
-  };
 
   render() {
     const fragment = this.compile(styled(tpl, cs), this.props);
