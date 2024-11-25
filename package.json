@@ -10,15 +10,20 @@
     "start": "npm run build && serve -s dist -l 3000",
     "dev": "vite",
     "lint:typecheck": "tsc --noEmit",
+    "lint:typescript": "eslint . --ext .ts",
+    "lint:typescript:fix": "eslint . --ext .ts --fix",
     "build": "tsc && vite build --emptyOutDir",
     "preview": "vite preview",
     "prettify": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,html,md,hbs}'"
   },
   "devDependencies": {
     "@types/node": "^22.8.6",
-    "@typescript-eslint/eslint-plugin": "^8.14.0",
-    "@typescript-eslint/parser": "^8.14.0",
-    "eslint-config-airbnb": "^19.0.4",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "postcss-normalize": "^13.0.1",
     "postcss-preset-env": "^10.0.8",
@@ -28,9 +33,7 @@
     "vite": "^5.4.10"
   },
   "dependencies": {
-    "eslint": "^8.57.1",
     "handlebars": "^4.7.8",
     "uuid": "^11.0.3"
-  },
-  "packageManager": "yarn@4.5.1+sha512.341db9396b6e289fecc30cd7ab3af65060e05ebff4b3b47547b278b9e67b08f485ecd8c79006b405446262142c7a38154445ef7f17c1d5d1de7d90bf9ce7054d"
+  }
 }
