@@ -1,9 +1,13 @@
-import { Block } from '../../core';
 import { InputGroup } from '../../components/input-group';
 import { Button } from '../../components/button';
 import tpl from './user-profile-password.hbs';
 import { PASSWORD_REGEX } from '../../constants';
 import { validate } from '../../utils/validate';
+import {
+  ProfileLayout,
+  ProfileLayoutProps,
+} from '../../components/profile-layout';
+import { Router } from '../../core';
 
 export type UserProfilePasswordBlockProps = {
   readonly oldPasswordInput: InputGroup;
@@ -12,8 +16,10 @@ export type UserProfilePasswordBlockProps = {
   readonly submitButton: Button;
 };
 
-export class UserProfilePasswordBlock extends Block<UserProfilePasswordBlockProps> {
-  constructor() {
+export class UserProfilePasswordBlock extends ProfileLayout<
+  UserProfilePasswordBlockProps & ProfileLayoutProps
+> {
+  constructor(private readonly router: Router) {
     super({
       oldPasswordInput: new InputGroup({
         id: 'oldPassword',
@@ -63,7 +69,11 @@ export class UserProfilePasswordBlock extends Block<UserProfilePasswordBlockProp
     }
   };
 
-  render() {
+  goBack() {
+    this.router.navigate('/user-profile');
+  }
+
+  renderContent() {
     return this.compile(tpl, this.props);
   }
 }

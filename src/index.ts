@@ -37,7 +37,6 @@ Handlebars.registerPartial('chatFooter', chatFooter);
 Handlebars.registerPartial('profileBack', profileBack);
 Handlebars.registerPartial('profileAvatar', profileAvatar);
 Handlebars.registerPartial('profileField', profileField);
-Handlebars.registerPartial('profileLayout', profileLayout);
 
 for (const [key, icon] of Object.entries(icons)) {
   Handlebars.registerPartial(`icon_${key}`, icon);

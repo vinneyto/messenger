@@ -1,4 +1,4 @@
-import { Block } from '../../core';
+import { Router } from '../../core';
 import { InputGroup } from '../../components/input-group';
 import { Button } from '../../components/button';
 import tpl from './user-profile-data.hbs';
@@ -11,6 +11,10 @@ import {
   NOT_EMPTY_REGEX,
 } from '../../constants';
 import { validate } from '../../utils/validate';
+import {
+  ProfileLayout,
+  ProfileLayoutProps,
+} from '../../components/profile-layout';
 
 export type UserProfileDataBlockProps = {
   readonly emailInput: InputGroup;
@@ -22,8 +26,10 @@ export type UserProfileDataBlockProps = {
   readonly submitButton: Button;
 };
 
-export class UserProfileDataBlock extends Block<UserProfileDataBlockProps> {
-  constructor() {
+export class UserProfileDataBlock extends ProfileLayout<
+  UserProfileDataBlockProps & ProfileLayoutProps
+> {
+  constructor(private readonly router: Router) {
     super({
       emailInput: new InputGroup({
         id: 'email',
@@ -83,7 +89,11 @@ export class UserProfileDataBlock extends Block<UserProfileDataBlockProps> {
     validate(this.props);
   };
 
-  render() {
+  goBack(): void {
+    this.router.navigate('/user-profile');
+  }
+
+  renderContent() {
     return this.compile(tpl, this.props);
   }
 }
