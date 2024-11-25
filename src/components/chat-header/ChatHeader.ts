@@ -1,5 +1,4 @@
-import { Block } from '../../core';
-import { styled } from '../../core';
+import { Block, styled } from '../../core';
 import tpl from './chat-header.hbs';
 import cs from './chat-header.module.css';
 

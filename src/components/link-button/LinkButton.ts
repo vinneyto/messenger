@@ -1,5 +1,4 @@
-import { Block, BlockEventMap } from '../../core';
-import { styled } from '../../core';
+import { Block, BlockEventMap, styled } from '../../core';
 import tpl from './link-button.hbs';
 import cs from './link-button.module.css';
 

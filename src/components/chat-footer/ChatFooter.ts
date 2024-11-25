@@ -1,5 +1,4 @@
-import { Block } from '../../core';
-import { styled } from '../../core';
+import { Block, styled } from '../../core';
 import { validate } from '../../utils/validate';
 import { ChatInput } from '../chat-input';
 import tpl from './chat-footer.hbs';

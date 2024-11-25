@@ -64,7 +64,6 @@ export class UserProfilePasswordBlock extends ProfileLayout<
         hasError: true,
         errorMessage: 'Passwords do not match',
       });
-      return;
     }
   };
 

@@ -38,9 +38,13 @@ export abstract class Block<
   private readonly _renderTarget: BlockRenderTarget;
 
   private _props: Props;
+
   private _events: BlockEvents = {};
+
   private _element: Element | null = null;
+
   private _domEvents: { [key: string]: EventListener } = {};
+
   private _children: Record<string, Block> = {};
 
   constructor(props: Props, events: BlockEvents = {}) {
@@ -232,6 +236,7 @@ export abstract class Block<
   }
 
   private _collapsePropsUpdate = false;
+
   private _propsChanged = false;
 
   private _makePropsProxy(props: Props) {

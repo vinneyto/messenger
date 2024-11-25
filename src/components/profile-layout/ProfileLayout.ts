@@ -1,6 +1,5 @@
-import { Block } from '../../core';
+import { Block, styled } from '../../core';
 
-import { styled } from '../../core';
 import { ProfileAvatar } from '../profile-avatar';
 import { ProfileBack } from '../profile-back';
 import tpl from './profile-layout.hbs';

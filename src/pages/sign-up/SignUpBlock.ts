@@ -1,6 +1,5 @@
 import { InputGroup } from '../../components/input-group';
-import { Block, Router } from '../../core';
-import { styled } from '../../core';
+import { Block, Router, styled } from '../../core';
 import tpl from './sign-up.hbs';
 import cs from './sign-up.module.css';
 import { Button } from '../../components/button';

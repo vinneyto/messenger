@@ -8,7 +8,7 @@ export function validate(
   let valid = true;
   for (const field of Object.values(props)) {
     if (field instanceof InputGroupBase) {
-      let blockValid = field.validate();
+      const blockValid = field.validate();
       if (!blockValid) {
         valid = false;
       }

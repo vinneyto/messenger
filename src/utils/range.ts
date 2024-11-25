@@ -24,15 +24,13 @@ export function range(
     for (let i = 0; i < count; i++) {
       result.push(start);
     }
+  } else if (step > 0) {
+    for (let i = start; i < end; i += step) {
+      result.push(i);
+    }
   } else {
-    if (step > 0) {
-      for (let i = start; i < end; i += step) {
-        result.push(i);
-      }
-    } else {
-      for (let i = start; i > end; i += step) {
-        result.push(i);
-      }
+    for (let i = start; i > end; i += step) {
+      result.push(i);
     }
   }
 
