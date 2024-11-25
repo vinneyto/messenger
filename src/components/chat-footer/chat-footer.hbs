@@ -3,12 +3,7 @@
     {{> icon_attachment }}
   </button>
 
-  <input
-    class="{{ cs.input }}"
-    name="message"
-    type="text"
-    placeholder="Message"
-  />
+  {{ block chatInput }}
 
   <button class="icon-button {{ cs.buttonSend }}" type="submit">
     {{> icon_send }}

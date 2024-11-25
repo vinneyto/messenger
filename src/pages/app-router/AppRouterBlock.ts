@@ -31,7 +31,7 @@ export class AppRouterBlock extends Block<AppRouterProps> {
 
     new Router(
       [
-        route('/', () => new ChatAreaBlock()),
+        route('/', (router) => new ChatAreaBlock(router)),
         route('/user-profile', () => new UserProfileBlock()),
         route('/user-profile-data', () => new UserProfileDataBlock()),
         route('/user-profile-password', () => new UserProfilePasswordBlock()),

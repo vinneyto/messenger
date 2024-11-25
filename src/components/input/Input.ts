@@ -33,6 +33,10 @@ export class Input extends Block<InputProps, InputEventMap> {
     this.eventBus.emit('blur', this, e);
   };
 
+  public focus() {
+    this.getInputElement().focus();
+  }
+
   componentShouldUpdate(oldProps: InputProps, newProps: InputProps) {
     if (
       oldProps.name !== newProps.name ||
@@ -68,6 +72,10 @@ export class Input extends Block<InputProps, InputEventMap> {
 
   getValue() {
     return this.props.value || '';
+  }
+
+  setValue(value: string) {
+    this.setProps({ value });
   }
 
   getName() {

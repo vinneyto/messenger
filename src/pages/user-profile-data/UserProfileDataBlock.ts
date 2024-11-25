@@ -8,7 +8,7 @@ import {
   FIRST_NAME_REGEX,
   SECOND_NAME_REGEX,
   PHONE_REGEX,
-  DISPLAY_NAME_REGEX,
+  NOT_EMPTY_REGEX,
 } from '../../constants';
 import { validate } from '../../utils/validate';
 
@@ -58,7 +58,7 @@ export class UserProfileDataBlock extends Block<UserProfileDataBlockProps> {
         name: 'display_name',
         label: 'Nickname',
         type: 'text',
-        validation: DISPLAY_NAME_REGEX,
+        validation: NOT_EMPTY_REGEX,
       }),
       phoneInput: new InputGroup({
         id: 'phone',

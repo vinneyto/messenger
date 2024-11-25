@@ -1,4 +1,4 @@
-import { InputGroup } from '../components/input-group';
+import { InputGroupBase } from '../components/input-group-base';
 
 export function validate(
   props: Record<string, unknown>,
@@ -7,7 +7,7 @@ export function validate(
 
   let valid = true;
   for (const field of Object.values(props)) {
-    if (field instanceof InputGroup) {
+    if (field instanceof InputGroupBase) {
       let blockValid = field.validate();
       if (!blockValid) {
         valid = false;

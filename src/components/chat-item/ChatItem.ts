@@ -8,7 +8,7 @@ export type ChatItemProps = {
   lastMessage: string;
 };
 
-export class ChatItem extends Block {
+export class ChatItem extends Block<ChatItemProps> {
   constructor(props: ChatItemProps) {
     super(props);
   }
