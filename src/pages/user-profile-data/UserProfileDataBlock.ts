@@ -13,13 +13,13 @@ import {
 import { validate } from '../../utils/validate';
 
 export type UserProfileDataBlockProps = {
-  emailInput: InputGroup;
-  loginInput: InputGroup;
-  firstNameInput: InputGroup;
-  secondNameInput: InputGroup;
-  displayNameInput: InputGroup;
-  phoneInput: InputGroup;
-  submitButton: Button;
+  readonly emailInput: InputGroup;
+  readonly loginInput: InputGroup;
+  readonly firstNameInput: InputGroup;
+  readonly secondNameInput: InputGroup;
+  readonly displayNameInput: InputGroup;
+  readonly phoneInput: InputGroup;
+  readonly submitButton: Button;
 };
 
 export class UserProfileDataBlock extends Block<UserProfileDataBlockProps> {

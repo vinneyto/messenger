@@ -4,7 +4,6 @@ import { EventBus } from './EventBus';
 import { BlockRenderTarget } from './BlockRenderTarget';
 
 export type BlockEventMap<Props> = {
-  init: [];
   'flow:component-did-mount': []; // element is inserted into DOM
   'flow:component-should-update': [Props, Props]; // request component rendering
   'flow:component-did-update': []; // we have updated element on this step
@@ -60,19 +59,16 @@ export abstract class Block<
   }
 
   private _registerEvents(eventBus: EventBus<EventMap>) {
-    eventBus.on('init', this._init);
     eventBus.on('flow:component-did-mount', this._componentDidMount);
     eventBus.on('flow:component-should-update', this._componentShouldUpdate);
     eventBus.on('flow:component-did-update', this._componentDidUpdate);
     eventBus.on('flow:render', this._render);
   }
 
-  private _initialized = false;
-
   mount(target: Element, replace = false) {
-    if (!this._initialized) {
-      this._initialized = true;
-      this.eventBus.emit('init');
+    if (!this._element) {
+      // first render
+      this.eventBus.emit('flow:render');
     }
 
     this._renderTarget.mount(target, replace);
@@ -81,11 +77,6 @@ export abstract class Block<
   unmount() {
     this._renderTarget.unmount();
   }
-
-  _init = () => {
-    // first render
-    this.eventBus.emit('flow:render');
-  };
 
   _collectChildren(props: Props) {
     const children: Record<string, Block> = {};
@@ -138,7 +129,7 @@ export abstract class Block<
 
     Object.assign(this.props, nextProps);
 
-    if (this._propsChanged) {
+    if (this._propsChanged && this._element) {
       this.eventBus.emit('flow:component-should-update', prevProps, this.props);
     }
 
@@ -228,7 +219,6 @@ export abstract class Block<
       child.destroy();
     }
 
-    this.eventBus.off('init', this._init);
     this.eventBus.off('flow:component-did-mount', this._componentDidMount);
     this.eventBus.off(
       'flow:component-should-update',
@@ -270,7 +260,9 @@ export abstract class Block<
           return true;
         }
 
-        self.eventBus.emit('flow:component-should-update', oldProps, target);
+        if (self._element) {
+          self.eventBus.emit('flow:component-should-update', oldProps, target);
+        }
 
         return true;
       },

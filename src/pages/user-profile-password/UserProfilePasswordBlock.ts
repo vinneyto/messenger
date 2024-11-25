@@ -6,10 +6,10 @@ import { PASSWORD_REGEX } from '../../constants';
 import { validate } from '../../utils/validate';
 
 export type UserProfilePasswordBlockProps = {
-  oldPasswordInput: InputGroup;
-  newPasswordInput: InputGroup;
-  confirmPasswordInput: InputGroup;
-  submitButton: Button;
+  readonly oldPasswordInput: InputGroup;
+  readonly newPasswordInput: InputGroup;
+  readonly confirmPasswordInput: InputGroup;
+  readonly submitButton: Button;
 };
 
 export class UserProfilePasswordBlock extends Block<UserProfilePasswordBlockProps> {
@@ -49,7 +49,7 @@ export class UserProfilePasswordBlock extends Block<UserProfilePasswordBlockProp
   private _onSubmit = (e: Event) => {
     e.preventDefault();
 
-    let [valid] = validate(this.props);
+    validate(this.props);
 
     const { newPasswordInput, confirmPasswordInput } = this.props;
     confirmPasswordInput.setProps({ errorMessage: undefined });
@@ -59,7 +59,7 @@ export class UserProfilePasswordBlock extends Block<UserProfilePasswordBlockProp
         hasError: true,
         errorMessage: 'Passwords do not match',
       });
-      valid = false;
+      return;
     }
   };
 

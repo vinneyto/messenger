@@ -26,7 +26,7 @@ export class Input extends Block<InputProps, InputEventMap> {
 
   private _onInput = (e: Event) => {
     this.eventBus.emit('input', this, e);
-    this.getInputElement().value = this.props.value || '';
+    this.getInputElement().value = this.getValue();
   };
 
   private _onBlur = (e: Event) => {
@@ -53,7 +53,13 @@ export class Input extends Block<InputProps, InputEventMap> {
   }
 
   render() {
-    return this.compile(styled(tpl, cs), this.props);
+    const fragment = this.compile(styled(tpl, cs), this.props);
+
+    const input = fragment.querySelector('input') as HTMLInputElement;
+
+    input.value = this.getValue();
+
+    return fragment;
   }
 
   getInputElement() {

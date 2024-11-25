@@ -2,7 +2,7 @@ import { InputGroup } from '../components/input-group';
 
 export function validate(
   props: Record<string, unknown>,
-): [boolean, Record<string, string>] {
+): Record<string, string> | null {
   const result: Record<string, string> = {};
 
   let valid = true;
@@ -19,7 +19,9 @@ export function validate(
 
   if (valid) {
     console.log(result);
+
+    return result;
   }
 
-  return [valid, result];
+  return null;
 }
