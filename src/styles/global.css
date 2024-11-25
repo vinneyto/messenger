@@ -97,8 +97,6 @@ a {
 /* Profile setting */
 
 .settings-section {
-  display: flex;
-  flex-direction: column;
   max-width: 510px;
   margin: 0 auto;
   margin-bottom: 3rem;
@@ -120,5 +118,6 @@ a {
   display: block;
   margin-top: 4rem;
   width: 280px;
-  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
 }
