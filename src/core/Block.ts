@@ -160,7 +160,8 @@ export abstract class Block<
     }
 
     for (const child of Object.values(this._children)) {
-      child.unmount();
+      // we are going to re-mount children - unsubscribe from previous render target
+      child._renderTarget.unsubscribe();
     }
 
     const block = this.render();
