@@ -1,0 +1,10 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-config-css-modules"],
+  "rules": {
+    "no-empty-source": null,
+    "selector-class-pattern": null,
+    "font-family-name-quotes": null,
+    "import-notation": "string"
+  },
+  "ignoreFiles": ["dist/**"]
+}
