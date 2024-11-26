@@ -12,5 +12,5 @@
     "class-methods-use-this": "off",
     "no-restricted-syntax": "off"
   },
-  "ignorePatterns": ["vite.config.ts", "vite-plugin-handlebars-precompile.ts", "dist/**"]
+  "ignorePatterns": ["vite.config.ts", "vite-plugin-handlebars-precompile.ts", "postcss.config.js", "dist/**"]
 }

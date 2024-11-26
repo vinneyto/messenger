@@ -28,7 +28,8 @@ export class AppRouterBlock extends Block<AppRouterProps> {
       },
     });
 
-    const router = new Router(
+    // eslint-disable-next-line no-new
+    new Router(
       [
         route('/', () => new ChatAreaBlock()),
         route('/user-profile', () => new UserProfileBlock()),
@@ -41,8 +42,6 @@ export class AppRouterBlock extends Block<AppRouterProps> {
       ],
       { fallback: '/404' },
     );
-
-    console.log(router);
   }
 
   render() {

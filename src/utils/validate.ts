@@ -18,7 +18,7 @@ export function validate(
   }
 
   if (valid) {
-    console.log(result);
+    console.log(result); // eslint-disable-line no-console
 
     return result;
   }
