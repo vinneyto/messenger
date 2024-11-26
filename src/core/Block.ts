@@ -23,7 +23,7 @@ export abstract class Block<
   EventMap extends BlockEventMap<Props> = BlockEventMap<Props>,
 > {
   public static initHandlebarsHelpers() {
-    Handlebars.registerHelper('block', function (block?: Block) {
+    Handlebars.registerHelper('block', (block?: Block) => {
       if (!block || !(block instanceof Block)) {
         return '';
       }
@@ -106,6 +106,7 @@ export abstract class Block<
     this.componentDidMount(this.props);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   componentDidMount(_oldProps: Props) {}
 
   private _componentShouldUpdate = (oldProps: Props, newProps: Props) => {
@@ -116,6 +117,7 @@ export abstract class Block<
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   componentShouldUpdate(_oldProps: Props, _newProps: Props) {
     return true;
   }
@@ -144,6 +146,7 @@ export abstract class Block<
   private _addDOMEvents(element: Element) {
     for (const [eventName, callback] of Object.entries(this._events)) {
       if (!callback) {
+        // eslint-disable-next-line no-continue
         continue;
       }
       element.addEventListener(eventName, callback as EventListener);
@@ -245,6 +248,7 @@ export abstract class Block<
     return new Proxy<Props>(props, {
       set(target, prop, value) {
         const oldProps = { ...target };
+        // eslint-disable-next-line no-param-reassign
         target[prop as keyof Props] = value as Props[keyof Props];
 
         if (oldProps[prop as keyof Props] === value) {

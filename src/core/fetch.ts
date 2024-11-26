@@ -69,7 +69,7 @@ class HTTPTransport {
       const { method, headers = {}, data } = options;
 
       if (!method) {
-        reject('No method');
+        reject(new Error('No method'));
         return;
       }
 

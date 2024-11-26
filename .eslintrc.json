@@ -7,7 +7,10 @@
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
     "prettier/prettier": "error",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "no-underscore-dangle": "off",
+    "class-methods-use-this": "off",
+    "no-restricted-syntax": "off"
   },
   "ignorePatterns": ["vite.config.ts", "vite-plugin-handlebars-precompile.ts"]
 }
