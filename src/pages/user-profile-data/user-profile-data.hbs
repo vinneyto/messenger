@@ -1,15 +1,9 @@
-{{#> profileLayout  backHref="/user-profile" }}
 <form class="settings-section">
-  {{> inputGroup id="email" name="email" label="Email" type="email"}}
-  {{> inputGroup id="login" name="login" label="Login" type="text"}}
-
-  {{> inputGroup id="first_name" name="first_name" label="First name" type="text"}}
-  {{> inputGroup id="second_name" name="second_name" label="Last name" type="text"}}
-
-  {{> inputGroup id="display_name" name="display_name" label="Nickname" type="text"}}
-
-  {{> inputGroup id="phone" name="phone" label="Phone" type="text"}}
-
-  {{> button label="Save" className="profile-submit" type="submit"}}
+  {{ block emailInput }}
+  {{ block loginInput }}
+  {{ block firstNameInput }}
+  {{ block secondNameInput }}
+  {{ block displayNameInput }}
+  {{ block phoneInput }}
+  {{ block submitButton }}
 </form>
-{{/profileLayout}}

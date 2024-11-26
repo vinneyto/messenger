@@ -1,0 +1,16 @@
+.message {
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 60%;
+  margin: 5px 0;
+}
+
+.own {
+  background-color: var(--color-message-own-background);
+  align-self: flex-end;
+}
+
+.foreign {
+  background-color: var(--color-message-foreign);
+  align-self: flex-start;
+}

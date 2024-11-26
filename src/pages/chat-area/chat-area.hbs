@@ -1,20 +1,16 @@
 <div class="{{ cs.chatArea }}">
   <nav class="{{ cs.sidebar }}">
-    {{> chatLinkProfile href="/user-profile" }}
-    {{> chatSearch }}
+    {{ block linkProfile }}
+    {{ block chatSearch }}
 
-    <ul class="{{ cs.sidebarChats }}">
-      {{#each chatItems}}
-      {{> chatItem name=this.name lastMessage=this.lastMessage}}
-      {{/each}}
-    </ul>
+    <ul class="{{ cs.sidebarChats }}"></ul>
   </nav>
 
   <main class="{{ cs.chatMain }}">
-    {{> chatHeader }}
+    {{ block header }}
 
-    <div class="{{ cs.startChat }}">Select chat to send a message</div>
+    <div class="{{ cs.messagesContainer }}"></div>
 
-    {{> chatFooter }}
+    {{ block footer }}
   </main>
 </div>

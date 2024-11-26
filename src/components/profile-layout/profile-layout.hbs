@@ -1,9 +1,7 @@
 <div class="{{ csProfileLayout.profileLayout }}">
-  {{> profileBack backHref=backHref }}
+  {{ block profileBack }}
 
   <main class="{{ csProfileLayout.profileArea }}">
-    {{> profileAvatar}}
-
-    {{> @partial-block }}
+    {{ block profileAvatar }}
   </main>
 </div>
