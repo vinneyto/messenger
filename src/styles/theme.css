@@ -1,12 +1,13 @@
 :root {
   --color-text-base: #1e1e1e;
-  --color-text-secondary: #999999;
-  --color-text-on-dark: #ffffff;
-  --color-alert-error: #ff0000;
+  --color-text-secondary: #999;
+  --color-text-on-dark: #fff;
+  --color-alert-error: #f00;
   --color-active: #3369f3;
   --color-input-background: #efefef;
   --color-message-foreign: #f8f8f8;
   --color-message-own: #e4edfd;
+  --color-message-own-background: #d1e7ff;
   --color-button-back: #fbfbfb;
   --color-border: #eaeaea;
   --chat-list-width: 310px;

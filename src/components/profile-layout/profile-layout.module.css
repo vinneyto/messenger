@@ -2,9 +2,12 @@
   display: flex;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 }
 
 .profileArea {
   flex-grow: 1;
-  margin-top: 50px;
+  padding-top: 50px;
+  max-height: 100vh;
+  overflow-y: auto;
 }

@@ -1,6 +1,6 @@
-type Route = {
+export type Route = {
   path: string;
-  action: () => void;
+  action: (router: Router) => void;
 };
 
 export interface RouterParams {
@@ -9,6 +9,7 @@ export interface RouterParams {
 
 export class Router {
   private routes: Route[];
+
   private fallback: string;
 
   constructor(routes: Route[], { fallback }: RouterParams) {
@@ -42,16 +43,16 @@ export class Router {
   }
 
   private handleRoute(path: string): void {
-    let route = this.routes.find((route) => route.path === path);
+    let route = this.routes.find((r) => r.path === path);
 
     if (!route) {
-      route = this.routes.find((route) => route.path === this.fallback);
+      route = this.routes.find((r) => r.path === this.fallback);
     }
 
     if (!route) {
       throw new Error('unable to navigate');
     }
 
-    route.action();
+    route.action(this);
   }
 }

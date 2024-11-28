@@ -9,20 +9,37 @@
   "scripts": {
     "start": "npm run build && serve -s dist -l 3000",
     "dev": "vite",
+    "lint:typecheck": "tsc --noEmit",
+    "lint:typescript": "eslint . --ext .ts",
+    "lint:typescript:fix": "eslint . --ext .ts --fix",
+    "lint:css": "stylelint '**/*.css' '**/*.module.css'",
+    "lint:all": "npm-run-all --parallel lint:typecheck lint:typescript lint:css lint:typescript:fix",
     "build": "tsc && vite build --emptyOutDir",
     "preview": "vite preview",
     "prettify": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,html,md,hbs}'"
   },
   "devDependencies": {
     "@types/node": "^22.8.6",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "npm-run-all": "^4.1.5",
     "postcss-normalize": "^13.0.1",
     "postcss-preset-env": "^10.0.8",
     "prettier": "^3.3.3",
     "serve": "^14.2.4",
+    "stylelint": "^16.10.0",
+    "stylelint-config-css-modules": "^4.4.0",
+    "stylelint-config-standard": "^36.0.1",
     "typescript": "~5.6.2",
     "vite": "^5.4.10"
   },
   "dependencies": {
-    "handlebars": "^4.7.8"
+    "handlebars": "^4.7.8",
+    "uuid": "^11.0.3"
   }
 }
