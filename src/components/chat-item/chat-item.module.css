@@ -40,11 +40,9 @@
 
 .lastMessage {
   flex-grow: 1;
-  overflow: hidden;
   font-size: calc(1rem - 1px);
   line-height: 1.2;
   color: var(--color-text-secondary);
-
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
