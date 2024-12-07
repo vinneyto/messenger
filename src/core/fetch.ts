@@ -26,7 +26,9 @@ function queryStringify(data: Record<string, any>): string {
   }, '?');
 }
 
-class HTTPTransport {
+export class HTTPTransport {
+  constructor(public baseUrl = '') {}
+
   get = (url: string, options: Options = {}) => {
     return this.request(
       url,
@@ -73,9 +75,13 @@ class HTTPTransport {
         return;
       }
 
+      const fullUrl = `${this.baseUrl}${url}`;
+
       xhr.open(
         method,
-        method === METHODS.GET && data ? `${url}${queryStringify(data)}` : url,
+        method === METHODS.GET && data
+          ? `${fullUrl}${queryStringify(data)}`
+          : fullUrl,
       );
 
       Object.keys(headers).forEach((key) => {
