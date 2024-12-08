@@ -1,7 +1,9 @@
 import { authApi, SigninDto } from '../api';
+import { handleError, networkError } from '../core';
 import { store } from '../store';
 
 class AuthController {
+  @handleError(networkError())
   async login(data: SigninDto) {
     await authApi.signin(data);
 
@@ -10,6 +12,7 @@ class AuthController {
     store.actions.user.setUser(user);
   }
 
+  @handleError(networkError())
   async logout() {
     await authApi.logout();
 

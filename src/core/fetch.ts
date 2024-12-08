@@ -26,10 +26,19 @@ function queryStringify(data: Record<string, any>): string {
   }, '?');
 }
 
+export type HTTPTransportDescriptor = {
+  baseUrl: string;
+  throwUnsuccess: boolean;
+  withCredentials: boolean;
+};
+
 export class HTTPTransport {
   constructor(
-    public baseUrl = '',
-    public throwUnsuccess = false,
+    private readonly dsc: HTTPTransportDescriptor = {
+      baseUrl: '',
+      throwUnsuccess: false,
+      withCredentials: false,
+    },
   ) {}
 
   get = (url: string, options: Options = {}) => {
@@ -72,13 +81,14 @@ export class HTTPTransport {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       const { method, headers = {}, data } = options;
+      const { withCredentials, baseUrl, throwUnsuccess } = this.dsc;
 
       if (!method) {
         reject(new Error('No method'));
         return;
       }
 
-      const fullUrl = `${this.baseUrl}${url}`;
+      const fullUrl = `${baseUrl}${url}`;
 
       xhr.open(
         method,
@@ -92,18 +102,19 @@ export class HTTPTransport {
       });
 
       xhr.onload = () => {
-        if (this.throwUnsuccess && xhr.status >= 400) {
+        if (throwUnsuccess && xhr.status >= 400) {
           reject(xhr);
         } else {
           resolve(xhr);
         }
       };
 
-      xhr.onerror = reject;
-      xhr.onabort = reject;
+      xhr.onerror = () => reject(xhr);
+      xhr.onabort = () => reject(xhr);
 
+      xhr.withCredentials = withCredentials;
       xhr.timeout = timeout;
-      xhr.ontimeout = reject;
+      xhr.ontimeout = () => reject(xhr);
 
       if (method === METHODS.GET || !data) {
         xhr.send();
