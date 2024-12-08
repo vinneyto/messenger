@@ -1,4 +1,4 @@
-import { HTTPTransport } from '../core';
+import { api } from './api';
 import {
   UserUpdateRequestDto,
   UserResponseDto,
@@ -6,11 +6,9 @@ import {
   FindUserRequestDto,
 } from './dto';
 
-export class UserApi {
-  constructor(private readonly transport: HTTPTransport) {}
-
+class UserApi {
   async updateProfile(data: UserUpdateRequestDto): Promise<UserResponseDto> {
-    return this.transport
+    return api
       .put('/user/profile', { data })
       .then((response) => JSON.parse(response.responseText));
   }
@@ -19,18 +17,20 @@ export class UserApi {
     const formData = new FormData();
     formData.append('avatar', avatar);
 
-    return this.transport
+    return api
       .put('/user/profile/avatar', { data: formData })
       .then((response) => JSON.parse(response.responseText));
   }
 
   async changePassword(data: ChangePasswordRequestDto): Promise<void> {
-    return this.transport.put('/user/password', { data }).then(() => {});
+    return api.put('/user/password', { data }).then(() => {});
   }
 
   async findUser(data: FindUserRequestDto): Promise<UserResponseDto[]> {
-    return this.transport
+    return api
       .post('/user/search', { data })
       .then((response) => JSON.parse(response.responseText));
   }
 }
+
+export const userApi = new UserApi();

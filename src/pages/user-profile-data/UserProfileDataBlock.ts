@@ -85,7 +85,14 @@ export class UserProfileDataBlock extends ProfileLayout<
   private _onSubmit = (e: Event) => {
     e.preventDefault();
 
-    validate(this.props);
+    validate({
+      email: this.props.emailInput,
+      login: this.props.loginInput,
+      first_name: this.props.firstNameInput,
+      second_name: this.props.secondNameInput,
+      display_name: this.props.displayNameInput,
+      phone: this.props.phoneInput,
+    });
   };
 
   getBackHref() {

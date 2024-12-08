@@ -8,7 +8,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api/v2': {
-        target: 'http://localhost:3000',
+        target: 'https://ya-praktikum.tech',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/v2/, ''),
       },

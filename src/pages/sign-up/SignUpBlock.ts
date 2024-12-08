@@ -1,5 +1,5 @@
 import { InputGroup } from '../../components/input-group';
-import { Block, Router, styled } from '../../core';
+import { appRouter, Block, styled } from '../../core';
 import tpl from './sign-up.hbs';
 import cs from './sign-up.module.css';
 import { Button } from '../../components/button';
@@ -27,7 +27,7 @@ export type SignUpBlockProps = {
 };
 
 export class SignUpBlock extends Block<SignUpBlockProps> {
-  constructor(private readonly router: Router) {
+  constructor() {
     super({
       emailInput: new InputGroup({
         id: 'email',
@@ -98,7 +98,15 @@ export class SignUpBlock extends Block<SignUpBlockProps> {
   private _onSubmit = (e: Event) => {
     e.preventDefault();
 
-    validate(this.props);
+    validate({
+      email: this.props.emailInput,
+      login: this.props.loginInput,
+      first_name: this.props.firstNameInput,
+      second_name: this.props.secondNameInput,
+      phone: this.props.phoneInput,
+      password: this.props.passwordInput,
+      confirmPassword: this.props.confirmPasswordInput,
+    });
 
     const { passwordInput, confirmPasswordInput } = this.props;
     confirmPasswordInput.setProps({ errorMessage: undefined });
@@ -112,7 +120,7 @@ export class SignUpBlock extends Block<SignUpBlockProps> {
   };
 
   private _onSignUpClick = () => {
-    this.router.navigate('/sign-in');
+    appRouter.go('/sign-in');
   };
 
   render() {

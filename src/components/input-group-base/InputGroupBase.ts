@@ -5,6 +5,7 @@ export type InputGroupBaseProps = {
   id: string;
   name: string;
   label: string;
+  value?: string;
   type?: string;
   validation?: RegExp;
   className?: string;
@@ -23,6 +24,7 @@ export abstract class InputGroupBase<
       input: new Input({
         id: props.id,
         name: props.name,
+        value: props.value,
         placeholder: props.label,
         type: props.type ?? 'text',
       }),

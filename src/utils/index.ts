@@ -6,3 +6,4 @@ export * from './merge';
 export * from './isEqual';
 export * from './cloneDeep';
 export * from './queryStringify';
+export * from './reactive';

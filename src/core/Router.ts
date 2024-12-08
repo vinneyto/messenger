@@ -1,24 +1,23 @@
+import { queryStringify } from '../utils/queryStringify';
+
 export type Route = {
   path: string;
   action: (router: Router) => void;
 };
 
-export interface RouterParams {
-  fallback: string;
-}
-
 export class Router {
-  private routes: Route[];
+  private _routes: Route[] = [];
 
-  private fallback: string;
+  private _fallback: string = '';
 
-  constructor(routes: Route[], { fallback }: RouterParams) {
-    this.routes = routes;
-    this.fallback = fallback;
-    this.init();
-  }
+  private _started: boolean = false;
 
-  private init(): void {
+  public start(): void {
+    if (this._started) {
+      return;
+    }
+    this._started = true;
+
     window.addEventListener('popstate', () =>
       this.handleRoute(window.location.pathname),
     );
@@ -29,7 +28,7 @@ export class Router {
         e.preventDefault();
         const path = target.getAttribute('href');
         if (path) {
-          this.navigate(path);
+          this.go(path);
         }
       }
     });
@@ -37,16 +36,36 @@ export class Router {
     this.handleRoute(window.location.pathname);
   }
 
-  public navigate(path: string): void {
-    window.history.pushState({}, '', path);
-    this.handleRoute(path);
+  use(path: string, action: (router: Router) => void) {
+    this._routes.push({ path, action });
+    return this;
+  }
+
+  fallback(path: string) {
+    this._fallback = path;
+    return this;
+  }
+
+  public go(path: string, query: Record<string, any> = {}): void {
+    const queryString = queryStringify(query);
+    const fullPath = queryString ? `${path}?${queryString}` : path;
+    window.history.pushState({}, '', fullPath);
+    this.handleRoute(fullPath);
+  }
+
+  public forward(): void {
+    window.history.forward();
+  }
+
+  public back(): void {
+    window.history.back();
   }
 
   private handleRoute(path: string): void {
-    let route = this.routes.find((r) => r.path === path);
+    let route = this._routes.find((r) => r.path === path);
 
     if (!route) {
-      route = this.routes.find((r) => r.path === this.fallback);
+      route = this._routes.find((r) => r.path === this._fallback);
     }
 
     if (!route) {
@@ -56,3 +75,5 @@ export class Router {
     route.action(this);
   }
 }
+
+export const appRouter = new Router();

@@ -54,7 +54,11 @@ export class UserProfilePasswordBlock extends ProfileLayout<
   private _onSubmit = (e: Event) => {
     e.preventDefault();
 
-    validate(this.props);
+    validate({
+      oldPassword: this.props.oldPasswordInput,
+      newPassword: this.props.newPasswordInput,
+      confirmPassword: this.props.confirmPasswordInput,
+    });
 
     const { newPasswordInput, confirmPasswordInput } = this.props;
     confirmPasswordInput.setProps({ errorMessage: undefined });

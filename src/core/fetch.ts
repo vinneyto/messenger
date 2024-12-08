@@ -27,7 +27,10 @@ function queryStringify(data: Record<string, any>): string {
 }
 
 export class HTTPTransport {
-  constructor(public baseUrl = '') {}
+  constructor(
+    public baseUrl = '',
+    public throwUnsuccess = false,
+  ) {}
 
   get = (url: string, options: Options = {}) => {
     return this.request(
@@ -89,7 +92,11 @@ export class HTTPTransport {
       });
 
       xhr.onload = () => {
-        resolve(xhr);
+        if (this.throwUnsuccess && xhr.status >= 400) {
+          reject(xhr);
+        } else {
+          resolve(xhr);
+        }
       };
 
       xhr.onerror = reject;

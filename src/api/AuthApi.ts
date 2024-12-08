@@ -1,4 +1,4 @@
-import { HTTPTransport } from '../core';
+import { api } from './api';
 import {
   SignupDto,
   SigninDto,
@@ -6,26 +6,26 @@ import {
   UserResponseDto,
 } from './dto';
 
-export class AuthApi {
-  constructor(private readonly transport: HTTPTransport) {}
-
+class AuthApi {
   async signup(data: SignupDto): Promise<SignupResponseSuccessDto> {
-    return this.transport
+    return api
       .post('/auth/signup', { data })
       .then((response) => JSON.parse(response.responseText));
   }
 
   async signin(data: SigninDto): Promise<void> {
-    return this.transport.post('/auth/signin', { data }).then(() => {});
+    return api.post('/auth/signin', { data }).then(() => {});
   }
 
   async getUser(): Promise<UserResponseDto> {
-    return this.transport
+    return api
       .get('/auth/user')
       .then((response) => JSON.parse(response.responseText));
   }
 
   async logout(): Promise<void> {
-    return this.transport.post('/auth/logout').then(() => {});
+    return api.post('/auth/logout').then(() => {});
   }
 }
+
+export const authApi = new AuthApi();

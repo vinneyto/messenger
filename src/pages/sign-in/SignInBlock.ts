@@ -2,7 +2,8 @@ import { Button } from '../../components/button';
 import { InputGroup } from '../../components/input-group';
 import { LinkButton } from '../../components/link-button';
 import { LOGIN_REGEX, PASSWORD_REGEX } from '../../constants';
-import { Block, Router, styled } from '../../core';
+import { authController } from '../../controllers';
+import { appRouter, Block, styled } from '../../core';
 import { validate } from '../../utils/validate';
 import signInTpl from './sign-in.hbs';
 import cs from './sign-in.module.css';
@@ -15,7 +16,7 @@ export type SignInProps = {
 };
 
 export class SignInBlock extends Block<SignInProps> {
-  constructor(private readonly router: Router) {
+  constructor() {
     super({
       loginInput: new InputGroup({
         id: 'login',
@@ -49,19 +50,20 @@ export class SignInBlock extends Block<SignInProps> {
   private _onSubmit = (e: Event) => {
     e.preventDefault();
 
-    const valid = validate(this.props);
+    const valid = validate({
+      login: this.props.loginInput,
+      password: this.props.passwordInput,
+    });
 
     if (!valid) {
       return;
     }
 
-    setTimeout(() => {
-      this.router.navigate('/');
-    }, 500);
+    authController.login(valid);
   };
 
   private _onSignUpClick = () => {
-    this.router.navigate('/sign-up');
+    appRouter.go('/sign-up');
   };
 
   render() {
