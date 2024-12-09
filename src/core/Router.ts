@@ -1,14 +1,14 @@
 import { queryStringify } from '../utils/queryStringify';
 
-export type Route = {
-  path: string;
+export type Route<Path extends string = string> = {
+  path: Path;
   action: (router: Router) => void;
 };
 
-export class Router {
-  private _routes: Route[] = [];
+export class Router<Path extends string = string> {
+  private _routes: Array<Route<Path>> = [];
 
-  private _fallback: string = '';
+  private _fallback?: Path;
 
   private _started: boolean = false;
 
@@ -28,7 +28,7 @@ export class Router {
         e.preventDefault();
         const path = target.getAttribute('href');
         if (path) {
-          this.go(path);
+          this.go(path as Path);
         }
       }
     });
@@ -36,17 +36,17 @@ export class Router {
     this.handleRoute(window.location.pathname);
   }
 
-  use(path: string, action: (router: Router) => void) {
+  use(path: Path, action: (router: Router) => void) {
     this._routes.push({ path, action });
     return this;
   }
 
-  fallback(path: string) {
+  fallback(path: Path) {
     this._fallback = path;
     return this;
   }
 
-  public go(path: string, query: Record<string, any> = {}): void {
+  public go(path: Path, query: Record<string, any> = {}): void {
     const queryString = queryStringify(query);
     const fullPath = queryString ? `${path}?${queryString}` : path;
     window.history.pushState({}, '', fullPath);
@@ -75,5 +75,3 @@ export class Router {
     route.action(this);
   }
 }
-
-export const appRouter = new Router();

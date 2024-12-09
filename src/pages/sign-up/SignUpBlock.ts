@@ -1,5 +1,5 @@
 import { InputGroup } from '../../components/input-group';
-import { appRouter, Block, styled } from '../../core';
+import { Block, styled } from '../../core';
 import tpl from './sign-up.hbs';
 import cs from './sign-up.module.css';
 import { Button } from '../../components/button';
@@ -13,6 +13,8 @@ import {
   PHONE_REGEX,
   PASSWORD_REGEX,
 } from '../../constants';
+import { authController } from '../../controllers';
+import { appRouter } from '../../appRouter';
 
 export type SignUpBlockProps = {
   emailInput: InputGroup;
@@ -95,10 +97,10 @@ export class SignUpBlock extends Block<SignUpBlockProps> {
     this.setEvents({ submit: this._onSubmit });
   }
 
-  private _onSubmit = (e: Event) => {
+  private _onSubmit = async (e: Event) => {
     e.preventDefault();
 
-    validate({
+    const valid = validate({
       email: this.props.emailInput,
       login: this.props.loginInput,
       first_name: this.props.firstNameInput,
@@ -108,6 +110,10 @@ export class SignUpBlock extends Block<SignUpBlockProps> {
       confirmPassword: this.props.confirmPasswordInput,
     });
 
+    if (!valid) {
+      return;
+    }
+
     const { passwordInput, confirmPasswordInput } = this.props;
     confirmPasswordInput.setProps({ errorMessage: undefined });
 
@@ -116,7 +122,10 @@ export class SignUpBlock extends Block<SignUpBlockProps> {
         hasError: true,
         errorMessage: 'Passwords do not match',
       });
+      return;
     }
+
+    await authController.signup(valid);
   };
 
   private _onSignUpClick = () => {

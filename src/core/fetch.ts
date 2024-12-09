@@ -80,8 +80,10 @@ export class HTTPTransport {
   ): Promise<XMLHttpRequest> => {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      const { method, headers = {}, data } = options;
+      const { method, headers = {} } = options;
       const { withCredentials, baseUrl, throwUnsuccess } = this.dsc;
+
+      let { data } = options;
 
       if (!method) {
         reject(new Error('No method'));
@@ -100,6 +102,17 @@ export class HTTPTransport {
       Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key]);
       });
+
+      // Add JSON header and serialize data if applicable
+      if (
+        method !== METHODS.GET &&
+        data &&
+        typeof data === 'object' &&
+        !(data instanceof FormData)
+      ) {
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        data = JSON.stringify(data);
+      }
 
       xhr.onload = () => {
         if (throwUnsuccess && xhr.status >= 400) {

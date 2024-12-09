@@ -1,9 +1,10 @@
+import { appRouter } from '../../appRouter';
 import { Button } from '../../components/button';
 import { InputGroup } from '../../components/input-group';
 import { LinkButton } from '../../components/link-button';
 import { LOGIN_REGEX, PASSWORD_REGEX } from '../../constants';
 import { authController } from '../../controllers';
-import { appRouter, Block, styled } from '../../core';
+import { Block, styled } from '../../core';
 import { validate } from '../../utils/validate';
 import signInTpl from './sign-in.hbs';
 import cs from './sign-in.module.css';

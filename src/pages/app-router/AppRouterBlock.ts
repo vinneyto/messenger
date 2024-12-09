@@ -1,5 +1,5 @@
+import { appRouter } from '../../appRouter';
 import { Block, styled } from '../../core';
-import { appRouter } from '../../core/Router';
 import { ChatAreaBlock } from '../chat-area';
 import { SignInBlock } from '../sign-in';
 import { SignUpBlock } from '../sign-up';

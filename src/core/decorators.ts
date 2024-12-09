@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { appRouter } from './Router';
+import { appRouter } from '../appRouter';
 
 const printHttpRequestError = (error: XMLHttpRequest) => {
   console.error(`HTTP Error: ${error.status} - ${error.statusText}`);
