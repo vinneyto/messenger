@@ -1,4 +1,5 @@
 import { styled } from '../../core';
+import { isEqual } from '../../utils';
 import { Input } from '../input';
 import { InputGroupBase, InputGroupBaseProps } from '../input-group-base';
 import tpl from './input-group.hbs';
@@ -27,6 +28,30 @@ export class InputGroup extends InputGroupBase<InputGroupProps> {
         label.classList.remove(cs.labelVisible);
       }
     }
+  }
+
+  componentShouldUpdate(
+    oldProps: InputGroupProps,
+    newProps: InputGroupProps,
+  ): boolean {
+    const oldSimple = { ...oldProps } as Record<string, unknown>;
+    const newSimple = { ...newProps } as Record<string, unknown>;
+
+    delete oldSimple.value;
+    delete newSimple.value;
+
+    delete oldSimple.input;
+    delete newSimple.input;
+
+    if (!isEqual(oldSimple, newSimple)) {
+      return true;
+    }
+
+    if (oldProps.value !== newProps.value) {
+      this.props.input.setValue(newProps.value ?? '');
+    }
+
+    return false;
   }
 
   renderTemplate(): DocumentFragment {

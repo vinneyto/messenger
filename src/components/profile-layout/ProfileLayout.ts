@@ -6,8 +6,8 @@ import tpl from './profile-layout.hbs';
 import cs from './profile-layout.module.css';
 
 export type ProfileLayoutProps = {
-  profileBack: ProfileBack;
-  profileAvatar: ProfileAvatar;
+  readonly profileBack: ProfileBack;
+  readonly profileAvatar: ProfileAvatar;
 };
 
 export abstract class ProfileLayout<

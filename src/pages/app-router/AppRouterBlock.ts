@@ -1,4 +1,5 @@
 import { appRouter } from '../../appRouter';
+import { authController } from '../../controllers';
 import { Block, styled } from '../../core';
 import { ChatAreaBlock } from '../chat-area';
 import { SignInBlock } from '../sign-in';
@@ -23,20 +24,34 @@ export class AppRouterBlock extends Block<AppRouterProps> {
         Ctor: new (...props: any[]) => T,
         ...rest: any[]
       ) =>
-      () => {
+      async () => {
         this.props.currentPage = new Ctor(...rest);
       };
 
+    const catchFn = async (e: any) => {
+      if (e instanceof XMLHttpRequest) {
+        if (e.status === 401) {
+          return '/sign-in';
+        }
+        return '/500';
+      }
+      return '/404';
+    };
+
+    const isPrivate = async () => {
+      await authController.getUser();
+    };
+
     appRouter
-      .use('/', route(ChatAreaBlock))
-      .use('/user-profile', route(UserProfileBlock))
-      .use('/user-profile-data', route(UserProfileDataBlock))
-      .use('/user-profile-password', route(UserProfilePasswordBlock))
+      .use('/', isPrivate, route(ChatAreaBlock))
+      .use('/user-profile', isPrivate, route(UserProfileBlock))
+      .use('/user-profile-data', isPrivate, route(UserProfileDataBlock))
+      .use('/user-profile-password', isPrivate, route(UserProfilePasswordBlock))
       .use('/sign-in', route(SignInBlock))
       .use('/sign-up', route(SignUpBlock))
       .use('/404', route(SmthWrongBlock, { code: 404 }))
       .use('/500', route(SmthWrongBlock, { code: 500 }))
-      .fallback('/404')
+      .catch(catchFn)
       .start();
   }
 

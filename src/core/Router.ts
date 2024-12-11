@@ -2,13 +2,13 @@ import { queryStringify } from '../utils/queryStringify';
 
 export type Route<Path extends string = string> = {
   path: Path;
-  action: (router: Router) => void;
+  actions: Array<() => Promise<void>>;
 };
 
 export class Router<Path extends string = string> {
   private _routes: Array<Route<Path>> = [];
 
-  private _fallback?: Path;
+  private _fallback?: (error: any) => Promise<Path>;
 
   private _started: boolean = false;
 
@@ -36,21 +36,32 @@ export class Router<Path extends string = string> {
     this.handleRoute(window.location.pathname);
   }
 
-  use(path: Path, action: (router: Router) => void) {
-    this._routes.push({ path, action });
+  use(path: Path, ...actions: Array<() => Promise<void>>) {
+    this._routes.push({ path, actions });
     return this;
   }
 
-  fallback(path: Path) {
-    this._fallback = path;
+  catch(fallback: (error: any) => Promise<Path>) {
+    this._fallback = fallback;
     return this;
   }
 
-  public go(path: Path, query: Record<string, any> = {}): void {
+  public async go(
+    path: Path,
+    query: Record<string, any> = {},
+    replace = false,
+  ): Promise<void> {
     const queryString = queryStringify(query);
     const fullPath = queryString ? `${path}?${queryString}` : path;
-    window.history.pushState({}, '', fullPath);
-    this.handleRoute(fullPath);
+    if (replace) {
+      window.history.replaceState({}, '', fullPath);
+    } else {
+      window.history.pushState({}, '', fullPath);
+    }
+
+    if (this._started) {
+      this.handleRoute(path);
+    }
   }
 
   public forward(): void {
@@ -61,17 +72,20 @@ export class Router<Path extends string = string> {
     window.history.back();
   }
 
-  private handleRoute(path: string): void {
-    let route = this._routes.find((r) => r.path === path);
+  private async handleRoute(path: string): Promise<void> {
+    const route = this._routes.find((r) => r.path === path);
 
-    if (!route) {
-      route = this._routes.find((r) => r.path === this._fallback);
+    try {
+      if (!route) {
+        throw new Error(`Route not found: ${path}`);
+      }
+
+      for (const action of route.actions) {
+        // eslint-disable-next-line no-await-in-loop
+        await action();
+      }
+    } catch (e) {
+      await this._fallback?.(e);
     }
-
-    if (!route) {
-      throw new Error('unable to navigate');
-    }
-
-    route.action(this);
   }
 }

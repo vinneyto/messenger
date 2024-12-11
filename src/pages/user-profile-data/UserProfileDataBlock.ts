@@ -14,8 +14,18 @@ import {
   ProfileLayout,
   ProfileLayoutProps,
 } from '../../components/profile-layout';
+import { Connect } from '../../store';
 
 export type UserProfileDataBlockProps = {
+  email: string;
+  login: string;
+  first_name: string;
+  second_name: string;
+  display_name: string;
+  phone: string;
+};
+
+export type UserProfileDataBlockState = {
   readonly emailInput: InputGroup;
   readonly loginInput: InputGroup;
   readonly firstNameInput: InputGroup;
@@ -25,17 +35,39 @@ export type UserProfileDataBlockProps = {
   readonly submitButton: Button;
 };
 
+@Connect((state) => ({
+  email: state.user.email,
+  login: state.user.login,
+  first_name: state.user.first_name,
+  second_name: state.user.second_name,
+  display_name: state.user.display_name,
+  phone: state.user.phone,
+}))
 export class UserProfileDataBlock extends ProfileLayout<
-  UserProfileDataBlockProps & ProfileLayoutProps
+  UserProfileDataBlockProps & UserProfileDataBlockState & ProfileLayoutProps
 > {
-  constructor() {
+  constructor(props: Partial<UserProfileDataBlockProps> = {}) {
+    const user = {
+      email: '',
+      login: '',
+      first_name: '',
+      second_name: '',
+      display_name: '',
+      phone: '',
+      ...props,
+    };
+
     super({
+      ...user,
+
+      // state
       emailInput: new InputGroup({
         id: 'email',
         name: 'email',
         label: 'Email',
         type: 'email',
         validation: EMAIL_REGEX,
+        value: user.email,
       }),
       loginInput: new InputGroup({
         id: 'login',
@@ -43,6 +75,7 @@ export class UserProfileDataBlock extends ProfileLayout<
         label: 'Login',
         type: 'text',
         validation: LOGIN_REGEX,
+        value: user.login,
       }),
       firstNameInput: new InputGroup({
         id: 'first_name',
@@ -50,6 +83,7 @@ export class UserProfileDataBlock extends ProfileLayout<
         label: 'First name',
         type: 'text',
         validation: FIRST_NAME_REGEX,
+        value: user.first_name,
       }),
       secondNameInput: new InputGroup({
         id: 'second_name',
@@ -57,6 +91,7 @@ export class UserProfileDataBlock extends ProfileLayout<
         label: 'Last name',
         type: 'text',
         validation: SECOND_NAME_REGEX,
+        value: user.second_name,
       }),
       displayNameInput: new InputGroup({
         id: 'display_name',
@@ -64,6 +99,7 @@ export class UserProfileDataBlock extends ProfileLayout<
         label: 'Nickname',
         type: 'text',
         validation: NOT_EMPTY_REGEX,
+        value: user.display_name,
       }),
       phoneInput: new InputGroup({
         id: 'phone',
@@ -71,6 +107,7 @@ export class UserProfileDataBlock extends ProfileLayout<
         label: 'Phone',
         type: 'text',
         validation: PHONE_REGEX,
+        value: user.phone,
       }),
       submitButton: new Button({
         type: 'submit',
@@ -80,6 +117,20 @@ export class UserProfileDataBlock extends ProfileLayout<
     });
 
     this.setEvents({ submit: this._onSubmit });
+  }
+
+  componentShouldUpdate() {
+    const state = this.props as UserProfileDataBlockState;
+    const props = this.props as UserProfileDataBlockProps;
+
+    state.emailInput.props.value = props.email;
+    state.loginInput.props.value = props.login;
+    state.firstNameInput.props.value = props.first_name;
+    state.secondNameInput.props.value = props.second_name;
+    state.displayNameInput.props.value = props.display_name;
+    state.phoneInput.props.value = props.phone;
+
+    return false;
   }
 
   private _onSubmit = (e: Event) => {
