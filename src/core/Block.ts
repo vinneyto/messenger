@@ -18,7 +18,7 @@ export type BlockEvents = {
   [K in keyof HTMLElementEventMap]?: (event: HTMLElementEventMap[K]) => void;
 };
 
-export abstract class Block<
+export class Block<
   Props extends DefaultProps = DefaultProps,
   EventMap extends BlockEventMap<Props> = BlockEventMap<Props>,
 > {
@@ -216,7 +216,9 @@ export abstract class Block<
     return fragment.content;
   }
 
-  abstract render(): DocumentFragment;
+  render(): DocumentFragment {
+    throw new Error('Render method is not implemented');
+  }
 
   destroy() {
     if (this._element) {
